@@ -10,9 +10,9 @@ namespace RoboPlant.Server.REST.EntryPoint
     public class EntryPoint : Controller
     {
         [HttpGetHypermediaObject(typeof(EntryPointHto))]
-        public EntryPointHto GetEntryPoint()
+        public ActionResult GetEntryPoint()
         {
-            return new EntryPointHto();
+            return Ok(new EntryPointHto());
         }
     }
 }
