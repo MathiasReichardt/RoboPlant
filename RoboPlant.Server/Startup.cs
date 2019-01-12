@@ -34,6 +34,9 @@ namespace RoboPlant.Server
                 // Initializes and adds the Hypermedia Extensions
                 options.AddHypermediaExtensions();
             });
+
+            // Infrastructure
+            services.AddCors();
             builder.AddMvcOptions(o => { o.Filters.Add(new GlobalExceptionFilter(null)); });
 
             // Required by Hypermedia Extensions
@@ -48,6 +51,15 @@ namespace RoboPlant.Server
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithExposedHeaders("Location");
+                }
+            );
             app.UseMvc();
 
             // unknown route
