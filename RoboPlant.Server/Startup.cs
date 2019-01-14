@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
-using RoboPlant.Server.REST.Problems;
 using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 using Bluehands.Hypermedia.MediaTypes;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using RoboPlant.Server.GlopbalExceptionHandler;
+using RoboPlant.Server.Problems;
 
 namespace RoboPlant.Server
 {

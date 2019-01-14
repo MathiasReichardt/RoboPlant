@@ -3,7 +3,7 @@ using System.Net;
 using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.Exceptions;
 
-namespace RoboPlant.Server.REST.Problems
+namespace RoboPlant.Server.Problems
 {
     public static class ProblemFactory
     {
