@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "4930105d-5300-4547-ba95-1ae73229c11c",
+		"name": "RoboPlant",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "entrypoint",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "84fd98a2-0ba8-40af-b018-dca83615002a",
+						"exec": [
+							"tests[\"response code is 200\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/entrypoint",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"entrypoint"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
