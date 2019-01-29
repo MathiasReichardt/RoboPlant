@@ -1,0 +1,15 @@
+﻿/* no self links */
+
+Digraph {
+    graph [ dpi = 600 ]; 
+    labelloc="t";
+    labeljust=left;
+    fontname="arial"
+
+    rankdir=TB
+    node [shape=box,style=filled, fontname = "arial"];
+    edge [fontname = "arial"];
+
+    EntyrPoint -> ProductionLines[label="Production"];
+}
+
