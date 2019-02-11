@@ -32,7 +32,11 @@ namespace RoboPlant.Server
                     }, ArrayPool<char>.Shared));
 
                 // Initializes and adds the Hypermedia Extensions
-                options.AddHypermediaExtensions();
+                options.AddHypermediaExtensions(
+                    hypermediaOptions: new HypermediaExtensionsOptions
+                    {
+                        ReturnDefaultRouteForUnknownHto = true
+                    });
             });
 
             // Infrastructure
