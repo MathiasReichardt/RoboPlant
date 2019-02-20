@@ -13,4 +13,9 @@
     <PackageReference Include="WebApiHypermediaExtensionsCore" Version="1.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RoboPlant.Application\RoboPlant.Application.csproj" />
+    <ProjectReference Include="..\RoboPlant.InMemoryPersistence\RoboPlant.InMemoryPersistence.csproj" />
+  </ItemGroup>
+
 </Project>

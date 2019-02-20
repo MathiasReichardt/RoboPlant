@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="SharpRepository.InMemoryRepository" Version="2.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\RoboPlant.Application\RoboPlant.Application.csproj" />
   </ItemGroup>
 

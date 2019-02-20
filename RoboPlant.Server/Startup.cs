@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 using Bluehands.Hypermedia.MediaTypes;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using RoboPlant.Application.Persistence;
+using RoboPlant.Application.ProductionLines;
+using RoboPlant.InMemoryPersistence;
 using RoboPlant.Server.GlopbalExceptionHandler;
 using RoboPlant.Server.Problems;
 
@@ -45,6 +48,10 @@ namespace RoboPlant.Server
 
             // Required by Hypermedia Extensions
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+            // DI for application
+            services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
+            services.AddTransient<ProductionLinesCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

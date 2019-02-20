@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
 
 namespace RoboPlant.Server.REST.ProductionLine
@@ -7,9 +8,10 @@ namespace RoboPlant.Server.REST.ProductionLine
     [ApiController]
     public class ProductionLineController : Controller
     {
-        [HttpGetHypermediaObject(typeof(ProductionLineHto))]
-        public ActionResult GetProductionLines()
+        [HttpGetHypermediaObject("{productionLineId}", typeof(ProductionLineHto))]
+        public ActionResult GetProductionLines(Guid productionLineId)
         {
+            throw new NotImplementedException();
             return Ok(null);
         }
 

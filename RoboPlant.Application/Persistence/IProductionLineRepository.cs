@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using RoboPlant.Domain.ProductionLine;
+using RoboPlant.Domain.Production;
 
 namespace RoboPlant.Application.Persistence
 {

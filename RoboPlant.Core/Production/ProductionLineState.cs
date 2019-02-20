@@ -1,4 +1,4 @@
-﻿namespace RoboPlant.Domain.ProductionLine
+﻿namespace RoboPlant.Domain.Production
 {
     public enum ProductionLineState
     {

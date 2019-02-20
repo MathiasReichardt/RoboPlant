@@ -1,5 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using RoboPlant.Server.REST.EntryPoint;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using RoboPlant.Application.ProductionLines;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
 
 namespace RoboPlant.Server.REST.ProductionLines
@@ -8,10 +9,19 @@ namespace RoboPlant.Server.REST.ProductionLines
     [ApiController]
     public class ProductionLinesController : Controller
     {
-        [HttpGetHypermediaObject(typeof(ProductionLinesHto))]
-        public ActionResult GetProductionLines()
+        private readonly ProductionLinesCommandHandler commandHandler;
+
+        public ProductionLinesController(ProductionLinesCommandHandler commandHandler)
         {
-            return Ok(new ProductionLinesHto());
+            this.commandHandler = commandHandler;
+        }
+
+        [HttpGetHypermediaObject(typeof(ProductionLinesHto))]
+        public async Task<ActionResult> GetProductionLines()
+        {
+            var productionLines = await commandHandler.GetAllProductionLines();
+            var result = new ProductionLinesHto(productionLines);
+            return Ok(result);
         }
 
     }
