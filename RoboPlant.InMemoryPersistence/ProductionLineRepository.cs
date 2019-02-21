@@ -26,26 +26,25 @@ namespace RoboPlant.InMemoryPersistence
             {
                 new ProductionLineModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("EDAEF8DA-C0CC-4284-B50F-086E468A399C"),
                     HumanReadableName = "Line 1",
                     State = ProductionLineState.Idle
                 },
                 new ProductionLineModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("60BF9495-E64C-4766-9E27-F7F6827F477C"),
                     HumanReadableName = "Line 2",
                     State = ProductionLineState.Idle
                 },
                 new ProductionLineModel
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("7FC32333-19D2-4C82-9E3A-C7C6B5583194"),
                     HumanReadableName = "Line 3",
                     State = ProductionLineState.Idle
                 }
             };
-          
+
             this.internalRepository.Add(insertItems);
-            
         }
 
         public Task<ICollection<ProductionLine>> GetAll()
@@ -57,9 +56,11 @@ namespace RoboPlant.InMemoryPersistence
             return Task.FromResult<ICollection<ProductionLine>>(result);
         }
 
-        public Task<ProductionLine> GetById()
+        public Task<ProductionLine> GetById(ProductionLineId productionLineId)
         {
-            throw new NotImplementedException();
+            var result = this.internalRepository.Get(productionLineId.Value);
+            return Task.FromResult(new ProductionLine(new ProductionLineId(result.Id), result.HumanReadableName,
+                result.State));
         }
     }
 }
