@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "entrypoint",
+			"name": "EntryPoint",
 			"event": [
 				{
 					"listen": "test",
@@ -36,6 +36,55 @@
 					"path": [
 						"api",
 						"entrypoint"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Production",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/production",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"production"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ProductionLine",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/productionline/edaef8da-c0cc-4284-b50f-086e468a399c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"productionline",
+						"edaef8da-c0cc-4284-b50f-086e468a399c"
 					]
 				}
 			},
