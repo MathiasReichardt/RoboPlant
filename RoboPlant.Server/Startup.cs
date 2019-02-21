@@ -44,8 +44,9 @@ namespace RoboPlant.Server
 
             // Infrastructure
             services.AddCors();
+            services.AddSingleton<IProblemFactory, ProblemFactory>();
             
-            builder.AddMvcOptions(o => { o.Filters.Add(new GlobalExceptionFilter(null)); });
+            builder.AddMvcOptions(o => { o.Filters.Add(new GlobalExceptionFilter(services)); });
 
             // Required by Hypermedia Extensions
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -53,11 +54,11 @@ namespace RoboPlant.Server
             // DI for application
             services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
             services.AddTransient<ProductionCommandHandler>();
-            services.AddTransient<ProductionLineCommandHandler>();
+            //services.AddTransient<ProductionLineCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IProblemFactory problemFactory)
         {
             if (env.IsDevelopment())
             {
@@ -78,7 +79,7 @@ namespace RoboPlant.Server
             // unknown route
             app.Run(async context =>
             {
-                var problem = ProblemFactory.NotFound();
+                var problem = problemFactory.NotFound();
                 context.Response.ContentType = DefaultMediaTypes.ProblemJson;
                 context.Response.StatusCode = problem.StatusCode;
                 await context.Response.WriteAsync(JsonConvert.SerializeObject(problem));

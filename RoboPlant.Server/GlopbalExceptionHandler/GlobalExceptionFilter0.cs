@@ -1,6 +1,8 @@
 ﻿using System;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RoboPlant.Server.Problems;
 using WebApi.HypermediaExtensions.ErrorHandling;
@@ -10,19 +12,30 @@ namespace RoboPlant.Server.GlopbalExceptionHandler
 {
     public class GlobalExceptionFilter : IExceptionFilter, IDisposable
     {
-        private readonly ILogger logger;
+        private ILogger Logger { get; }
 
-        public GlobalExceptionFilter(ILoggerFactory logger)
+        private IProblemFactory ProblemFactory { get; }
+        
+        public GlobalExceptionFilter(IServiceCollection serviceCollection)
         {
-            if (logger != null)
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+
+            var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
+            if (loggerFactory != null)
             {
-                this.logger = logger.CreateLogger("Global Exception Filter");
+                this.Logger = loggerFactory.CreateLogger("Global Exception Filter");
+            }
+
+            ProblemFactory = serviceProvider.GetService<IProblemFactory>();
+            if (ProblemFactory == null)
+            {
+                throw new Exception("Could not get problem factory for global exception handler.");
             }
         }
 
         public void OnException(ExceptionContext context)
         {
-            logger?.LogError("GlobalExceptionFilter", context.Exception);
+            Logger?.LogError("{Exception}", context.Exception);
 
             ExceptionProblemJson exceptionProblemJson;
             switch (context.Exception)
