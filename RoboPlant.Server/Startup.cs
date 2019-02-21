@@ -44,6 +44,7 @@ namespace RoboPlant.Server
 
             // Infrastructure
             services.AddCors();
+            
             builder.AddMvcOptions(o => { o.Filters.Add(new GlobalExceptionFilter(null)); });
 
             // Required by Hypermedia Extensions
@@ -52,6 +53,7 @@ namespace RoboPlant.Server
             // DI for application
             services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
             services.AddTransient<ProductionLinesCommandHandler>();
+            services.AddTransient<ProductionLineCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
