@@ -10,6 +10,6 @@ Digraph {
     node [shape=box,style=filled, fontname = "arial"];
     edge [fontname = "arial"];
 
-    EntyrPoint -> ProductionLines[label="production"];
+    EntyrPoint -> Production[label="production"];
 }
 

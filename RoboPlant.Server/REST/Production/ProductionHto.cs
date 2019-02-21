@@ -1,19 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using RoboPlant.Server.REST.ProductionLine;
 using WebApi.HypermediaExtensions.Hypermedia;
 using WebApi.HypermediaExtensions.Hypermedia.Attributes;
 using WebApi.HypermediaExtensions.Hypermedia.Links;
 
-namespace RoboPlant.Server.REST.ProductionLines
+namespace RoboPlant.Server.REST.Production
 {
-    [HypermediaObject(Title = "Access to the available production lines of the RoboPlant", Classes = new[] { "ProductionLines" })]
-    public class ProductionLinesHto : HypermediaObject
+    [HypermediaObject(Title = "Access to the available production capabilities of the RoboPlant", Classes = new[] { "Production" })]
+    public class ProductionHto : HypermediaObject
     {
-        public ProductionLinesHto(ICollection<Domain.Production.ProductionLine> productionLines)
+        public ProductionHto(ICollection<Domain.Production.ProductionLine> productionLine)
         {
-            var productionLineHtos = productionLines.Select(p => 
+            var productionLineHtos = productionLine.Select(p => 
                 new RelatedEntity("ProductionLine", new HypermediaObjectReference(new ProductionLineHto(p))));
 
             this.Entities.AddRange(productionLineHtos);

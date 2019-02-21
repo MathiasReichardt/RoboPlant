@@ -9,7 +9,7 @@ using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 using Bluehands.Hypermedia.MediaTypes;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using RoboPlant.Application.Persistence;
-using RoboPlant.Application.ProductionLines;
+using RoboPlant.Application.Production;
 using RoboPlant.InMemoryPersistence;
 using RoboPlant.Server.GlopbalExceptionHandler;
 using RoboPlant.Server.Problems;
@@ -52,7 +52,7 @@ namespace RoboPlant.Server
 
             // DI for application
             services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
-            services.AddTransient<ProductionLinesCommandHandler>();
+            services.AddTransient<ProductionCommandHandler>();
             services.AddTransient<ProductionLineCommandHandler>();
         }
 

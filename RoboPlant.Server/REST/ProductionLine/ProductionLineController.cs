@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using RoboPlant.Application.ProductionLines;
+using RoboPlant.Application.Production;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
 
 namespace RoboPlant.Server.REST.ProductionLine

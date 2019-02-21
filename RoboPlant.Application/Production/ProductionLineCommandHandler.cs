@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Domain.Production;
 
-namespace RoboPlant.Application.ProductionLines
+namespace RoboPlant.Application.Production
 {
     public class ProductionLineCommandHandler
     {
