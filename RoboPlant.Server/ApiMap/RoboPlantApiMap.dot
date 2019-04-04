@@ -1,7 +1,7 @@
 ﻿/* no self links */
 
 Digraph {
-    graph [ dpi = 600 ]; 
+    graph [ dpi = 300 ]; 
     labelloc="t";
     labeljust=left;
     fontname="arial"
@@ -10,6 +10,6 @@ Digraph {
     node [shape=box,style=filled, fontname = "arial"];
     edge [fontname = "arial"];
 
-    EntyrPoint -> Production[label="production"];
+    EntryPoint -> Production[label="production"];
 }
 
