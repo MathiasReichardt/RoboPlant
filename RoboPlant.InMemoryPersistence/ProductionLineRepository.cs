@@ -59,7 +59,9 @@ namespace RoboPlant.InMemoryPersistence
         public Task<ProductionLine> GetById(ProductionLineId productionLineId)
         {
             var result = this.internalRepository.Get(productionLineId.Value);
-            return Task.FromResult(new ProductionLine(new ProductionLineId(result.Id), result.HumanReadableName,
+            return Task.FromResult(new ProductionLine(
+                new ProductionLineId(result.Id),
+                result.HumanReadableName,
                 result.State));
         }
     }
