@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>RoboPlant.InMemoryPersistence</AssemblyName>
+    <RootNamespace>RoboPlant.InMemoryPersistence</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RoboPlant.Application\RoboPlant.Application.csproj" />
+    <ProjectReference Include="..\RoboPlant.Application\Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>RoboPlant.Domain</AssemblyName>
+    <RootNamespace>RoboPlant.Domain</RootNamespace>
   </PropertyGroup>
 
 </Project>

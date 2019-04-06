@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.168
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboPlant.Server", "RoboPlant.Server\RoboPlant.Server.csproj", "{DB2F638C-F284-4E30-A460-9E3DC98020C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "RoboPlant.Server\Server.csproj", "{DB2F638C-F284-4E30-A460-9E3DC98020C3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboPlant.Application", "RoboPlant.Application\RoboPlant.Application.csproj", "{78CA654E-D6ED-432B-807B-BFC2E61CDD9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "RoboPlant.Application\Application.csproj", "{78CA654E-D6ED-432B-807B-BFC2E61CDD9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboPlant.Domain", "RoboPlant.Core\RoboPlant.Domain.csproj", "{1DB809FB-B1DB-4ABC-898E-C84EB80FAB8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "RoboPlant.Core\Domain.csproj", "{1DB809FB-B1DB-4ABC-898E-C84EB80FAB8B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoboPlant.InMemoryPersistence", "RoboPlant.InMemoryPersistence\RoboPlant.InMemoryPersistence.csproj", "{9D336D6D-4A53-47EE-8A54-D7F9A24DF5BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMemoryPersistence", "RoboPlant.InMemoryPersistence\InMemoryPersistence.csproj", "{9D336D6D-4A53-47EE-8A54-D7F9A24DF5BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51575466-C5B1-41DC-81C4-C69257A43705}"
 	ProjectSection(SolutionItems) = preProject

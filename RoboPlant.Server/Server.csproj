@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <StartupObject></StartupObject>
+    <AssemblyName>RoboPlant.Server</AssemblyName>
+    <RootNamespace>RoboPlant.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,8 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RoboPlant.Application\RoboPlant.Application.csproj" />
-    <ProjectReference Include="..\RoboPlant.InMemoryPersistence\RoboPlant.InMemoryPersistence.csproj" />
+    <ProjectReference Include="..\RoboPlant.Application\Application.csproj" />
+    <ProjectReference Include="..\RoboPlant.InMemoryPersistence\InMemoryPersistence.csproj" />
   </ItemGroup>
 
 </Project>
