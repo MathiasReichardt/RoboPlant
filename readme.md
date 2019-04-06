@@ -20,3 +20,4 @@ There is a [tutorial](https://mathiasreichardt.github.io/HowToBuildARobot/) expl
 - *Application*: the Application/Use-Case layer: this layer provides interfaces to data sources and sinks. It uses them to trigger logic from the Domain Layer.
 - *InMemoryPersistence*: In memory implementation of the data sink interfaces.
 - *Server*: The host of the application. DI is configured here. Also the REST API is located here and accesses inner layers.
+- *Util*: Technical extensions not belonging to any specific project.
