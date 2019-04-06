@@ -8,7 +8,8 @@ This is a best effort approach. It will change to incorporate new ideas, fix iss
 - REST with hypermedia and HATEOAS
 - Clean Architecture design (by Robert C. Martin)
 - DDD Domain Driven Design
-  - Identity types
+  - Identity types so surrogate Id's are typed.
+- Pattern matching for operation results to avoid control flow by exception.
 
 ### Related Tutorial
 
