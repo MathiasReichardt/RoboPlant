@@ -7,7 +7,7 @@ namespace RoboPlant.Application.Persistence
 {
     public interface IProductionLineRepository
     {
-        Task<ICollection<ProductionLine>> GetAll();
+        Task<GetAllResult<ICollection<ProductionLine>>> GetAll();
 
         Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId);
     }

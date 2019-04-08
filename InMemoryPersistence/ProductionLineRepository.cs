@@ -48,13 +48,23 @@ namespace RoboPlant.InMemoryPersistence
             this.internalRepository.Add(insertItems);
         }
 
-        public Task<ICollection<ProductionLine>> GetAll()
+        public Task<GetAllResult<ICollection<ProductionLine>>> GetAll()
         {
-            var result = this.internalRepository
-                .GetAll()
-                .Select(m => new ProductionLine(new ProductionLineId(m.Id), m.HumanReadableName, m.State))
-                .ToList();
-            return Task.FromResult<ICollection<ProductionLine>>(result);
+            IEnumerable<ProductionLineModel> result;
+            try
+            {
+                result = this.internalRepository.GetAll();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return Task.FromResult<GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Error(e));
+            }
+
+            var resultList = result
+                            .Select(m => new ProductionLine(new ProductionLineId(m.Id), m.HumanReadableName, m.State))
+                            .ToList();
+            return Task.FromResult< GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Success(resultList));
         }
 
         public Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId)
@@ -66,6 +76,7 @@ namespace RoboPlant.InMemoryPersistence
             }
             catch (Exception e)
             {
+                Console.WriteLine(e);
                 return Task.FromResult<GetByIdResult<ProductionLine>>(new GetByIdResult<ProductionLine>.Error(e));
             }
 

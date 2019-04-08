@@ -4,31 +4,28 @@ using Util.PatternMatching;
 
 namespace RoboPlant.Application.Persistence.Results
 {
-    public abstract class GetByIdResult<TResult>
+    public abstract class GetAllResult<TResult>
     {
         public void Match(
             Action<Success> success,
-            Action<NotFound> notFound,
             Action<NotReachable> notReachable,
             Action<Error> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notReachable, error);
 
         public TMatchResult Match<TMatchResult>(
             Func<Success, TMatchResult> success,
-            Func<NotFound, TMatchResult> notFound,
             Func<NotReachable, TMatchResult> notReachable,
             Func<Error, TMatchResult> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notReachable, error);
 
         public Task<TMatchResult> Match<TMatchResult>(
             Func<Success, Task<TMatchResult>> success,
-            Func<NotFound, Task<TMatchResult>> notFound,
             Func<NotReachable, Task<TMatchResult>> notReachable,
             Func<Error, Task<TMatchResult>> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notReachable, error);
 
 
-        public sealed class Success : GetByIdResult<TResult>
+        public sealed class Success : GetAllResult<TResult>
         {
             public TResult Result { get; }
 
@@ -38,21 +35,14 @@ namespace RoboPlant.Application.Persistence.Results
             }
         }
 
-        public sealed class NotFound : GetByIdResult<TResult>
-        {
-            public NotFound()
-            {
-            }
-        }
-
-        public sealed class NotReachable : GetByIdResult<TResult>
+        public sealed class NotReachable : GetAllResult<TResult>
         {
             public NotReachable()
             {
             }
         }
 
-        public sealed class Error : GetByIdResult<TResult>
+        public sealed class Error : GetAllResult<TResult>
         {
             public Exception Exception { get; }
 

@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RoboPlant.Application.Production;
+using RoboPlant.Server.Problems;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
+using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 
 namespace RoboPlant.Server.REST.Production
 {
@@ -9,19 +11,25 @@ namespace RoboPlant.Server.REST.Production
     [ApiController]
     public class ProductionController : Controller
     {
-        private readonly ProductionCommandHandler commandHandler;
+        private IProblemFactory ProblemFactory { get; }
 
-        public ProductionController(ProductionCommandHandler commandHandler)
+        private ProductionCommandHandler CommandHandler { get; }
+
+        public ProductionController(ProductionCommandHandler commandHandler, IProblemFactory problemFactory)
         {
-            this.commandHandler = commandHandler;
+            ProblemFactory = problemFactory;
+            this.CommandHandler = commandHandler;
         }
 
         [HttpGetHypermediaObject(typeof(ProductionHto))]
         public async Task<ActionResult> GetProductionLines()
         {
-            var productionLines = await commandHandler.GetAllProductionLines();
-            var result = new ProductionHto(productionLines);
-            return Ok(result);
+            var getAllResult = await CommandHandler.GetAllProductionLines();
+
+            return getAllResult.Match(
+                success => Ok(new ProductionHto(success.Result)),
+                notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
+                error => this.Problem(ProblemFactory.Exception(error.Exception)));
         }
 
     }
