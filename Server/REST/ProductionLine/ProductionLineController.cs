@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Application.Production;
 using RoboPlant.Server.Problems;
-using Util.PatternMatching;
-using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
 using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.AspNetCore.Mvc;
 using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.Exceptions;
 
