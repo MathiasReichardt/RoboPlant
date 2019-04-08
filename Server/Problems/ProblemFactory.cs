@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Net;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Http;
 using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.Exceptions;
 
@@ -28,7 +27,30 @@ namespace RoboPlant.Server.Problems
                 Title = "Route not found",
                 Detail = "Requested a route which is not valid.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".RouteNotFound",
-                StatusCode = (int)HttpStatusCode.NotFound
+                StatusCode = StatusCodes.Status404NotFound
+            };
+        }
+
+        public ProblemJson EntityNotFound(string name, string id)
+        {
+            return new ProblemJson
+            {
+                Title = "Entity not found",
+                Detail = $"Requested a resource which is not available. Type: '{name}' Id: '{id}'",
+                ProblemType = RoboPlantProblemTypeNamespace + ".EntityNotFound",
+                StatusCode = StatusCodes.Status404NotFound
+            };
+        }
+
+        public ProblemJson ServiceUnavailable()
+        {
+            
+            return new ProblemJson
+            {
+                Title = "Service is not available",
+                Detail = $"Requestcould not be fullfilled because a required service is not available. Pease retry later.",
+                ProblemType = RoboPlantProblemTypeNamespace + ".ServiceUnavailable",
+                StatusCode = StatusCodes.Status503ServiceUnavailable
             };
         }
 
@@ -38,7 +60,7 @@ namespace RoboPlant.Server.Problems
             {
                 Title = "Hypermedia formatter error.",
                 ProblemType = RoboPlantProblemTypeNamespace+ ".HyperrmediaFormatterError",
-                StatusCode = (int)HttpStatusCode.InternalServerError,
+                StatusCode = StatusCodes.Status500InternalServerError,
                 Detail = this.AddExceptionDetail(hypermediaFormatterException)
             };
         }
@@ -49,18 +71,18 @@ namespace RoboPlant.Server.Problems
             {
                 Title = "Hypermedia error.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaError",
-                StatusCode = (int)HttpStatusCode.InternalServerError,
+                StatusCode = StatusCodes.Status500InternalServerError,
                 Detail = this.AddExceptionDetail(hypermediaException)
             };
         }
 
-        public ExceptionProblemJson Generic(Exception exception)
+        public ExceptionProblemJson Exception(Exception exception)
         {
             return new ExceptionProblemJson(exception)
             {
                 Title = "Sorry, something went wrong.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".InternalError",
-                StatusCode = (int)HttpStatusCode.InternalServerError,
+                StatusCode = StatusCodes.Status500InternalServerError,
                 Detail = this.AddExceptionDetail(exception)
             };
         }

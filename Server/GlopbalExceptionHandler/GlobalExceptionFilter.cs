@@ -48,7 +48,7 @@ namespace RoboPlant.Server.GlopbalExceptionHandler
                     break;
                 
                 default:
-                    exceptionProblemJson = ProblemFactory.Generic(context.Exception);
+                    exceptionProblemJson = ProblemFactory.Exception(context.Exception);
                     break;
             }
             

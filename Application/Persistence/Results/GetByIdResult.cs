@@ -4,7 +4,7 @@ using Util.PatternMatching;
 
 namespace RoboPlant.Application.Persistence.Results
 {
-    public abstract class RepositoryGetByIdResult<TResult>
+    public abstract class GetByIdResult<TResult>
     {
         public void Match(
             Action<Success> success,
@@ -28,7 +28,7 @@ namespace RoboPlant.Application.Persistence.Results
             => this.TypeMatch(success, notFound, notReachable, error);
 
 
-        public sealed class Success : RepositoryGetByIdResult<TResult>
+        public sealed class Success : GetByIdResult<TResult>
         {
             public TResult Result { get; }
 
@@ -38,21 +38,21 @@ namespace RoboPlant.Application.Persistence.Results
             }
         }
 
-        public sealed class NotFound : RepositoryGetByIdResult<TResult>
+        public sealed class NotFound : GetByIdResult<TResult>
         {
             public NotFound()
             {
             }
         }
 
-        public sealed class NotReachable : RepositoryGetByIdResult<TResult>
+        public sealed class NotReachable : GetByIdResult<TResult>
         {
             public NotReachable()
             {
             }
         }
 
-        public sealed class Error : RepositoryGetByIdResult<TResult>
+        public sealed class Error : GetByIdResult<TResult>
         {
             public Exception Exception { get; }
 
@@ -66,10 +66,10 @@ namespace RoboPlant.Application.Persistence.Results
 
     public static class TestResultsProducer
     {
-        public static RepositoryGetByIdResult<int> GetResult()
+        public static GetByIdResult<int> GetResult()
         {
             {
-                return new RepositoryGetByIdResult<int>.NotFound();
+                return new GetByIdResult<int>.NotFound();
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.Exceptions;
 
@@ -10,8 +11,12 @@ namespace RoboPlant.Server.Problems
 
         ExceptionProblemJson Exception(HypermediaException hypermediaException);
 
-        ExceptionProblemJson Generic(Exception exception);
+        ExceptionProblemJson Exception(Exception exception);
 
         ProblemJson NotFound();
+
+        ProblemJson EntityNotFound(string name, string id);
+
+        ProblemJson ServiceUnavailable();
     }
 }

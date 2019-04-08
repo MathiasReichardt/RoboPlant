@@ -1,7 +1,14 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Application.Production;
+using RoboPlant.Server.Problems;
+using Util.PatternMatching;
+using WebApi.HypermediaExtensions.ErrorHandling;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
+using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 
 namespace RoboPlant.Server.REST.ProductionLine
 {
@@ -11,18 +18,25 @@ namespace RoboPlant.Server.REST.ProductionLine
     {
         private ProductionLineCommandHandler CommandHandler { get; }
 
-        public ProductionLineController(ProductionLineCommandHandler commandHandler)
+        private IProblemFactory ProblemFactory { get; }
+
+        public ProductionLineController(ProductionLineCommandHandler commandHandler, IProblemFactory problemFactory)
         {
             CommandHandler = commandHandler;
+            ProblemFactory = problemFactory;
         }
 
         [HttpGetHypermediaObject("{productionLineId}", typeof(ProductionLineHto))]
-        public async System.Threading.Tasks.Task<ActionResult> GetProductionLinesAsync(Guid productionLineId)
+        public async Task<ActionResult> GetProductionLinesAsync(Guid productionLineId)
         {
-            var productionLine = await this.CommandHandler.GetById(productionLineId);
-            var result = new ProductionLineHto(productionLine);
-            return Ok(result);
-        }
+            var byIdResult = await this.CommandHandler.GetById(productionLineId);
 
+
+            return byIdResult.Match(
+                success => Ok(new ProductionLineHto(success.Result)),
+                notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
+                notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
+                error => this.Problem(ProblemFactory.Exception(error.Exception)));
+        }
     }
 }

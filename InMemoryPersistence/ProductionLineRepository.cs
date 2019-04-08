@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
+using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Domain.Production;
 using RoboPlant.InMemoryPersistence.Models;
 using SharpRepository.InMemoryRepository;
@@ -56,13 +57,28 @@ namespace RoboPlant.InMemoryPersistence
             return Task.FromResult<ICollection<ProductionLine>>(result);
         }
 
-        public Task<ProductionLine> GetById(ProductionLineId productionLineId)
+        public Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId)
         {
-            var result = this.internalRepository.Get(productionLineId.Value);
-            return Task.FromResult(new ProductionLine(
+            ProductionLineModel result;
+            try
+            {
+                result = this.internalRepository.Get(productionLineId.Value);
+            }
+            catch (Exception e)
+            {
+                return Task.FromResult<GetByIdResult<ProductionLine>>(new GetByIdResult<ProductionLine>.Error(e));
+            }
+
+            if (result == null)
+            {
+                return Task.FromResult<GetByIdResult<ProductionLine>>(new GetByIdResult<ProductionLine>.NotFound());
+            }
+
+            var productionLine = new ProductionLine(
                 new ProductionLineId(result.Id),
                 result.HumanReadableName,
-                result.State));
+                result.State);
+            return Task.FromResult<GetByIdResult<ProductionLine>>(new GetByIdResult<ProductionLine>.Success(productionLine));
         }
     }
 }
