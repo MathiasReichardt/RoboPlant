@@ -10,5 +10,7 @@ namespace RoboPlant.Application.Persistence
         Task<GetAllResult<ICollection<ProductionLine>>> GetAll();
 
         Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId);
+
+        Task<AddResult<ProductionLineId>> Add(ProductionLine productionLine);
     }
 }

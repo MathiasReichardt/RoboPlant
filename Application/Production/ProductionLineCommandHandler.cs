@@ -36,12 +36,20 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        private static ShutDownProductionLineResult ExecuteAction(ProductionLine productionLine)
+        private ShutDownProductionLineResult ExecuteAction(ProductionLine productionLine)
         {
             var result = productionLine.ShutDownForMaintenance.Match<ShutDownProductionLineResult>(
                 action => action.Invoke().Match<ShutDownProductionLineResult>(
                         exception => new ShutDownProductionLineResult.Error(exception),
-                        () => new ShutDownProductionLineResult.Success()), todo: persist
+                        () =>
+                        {
+                            var addResult = this.productionLineRepository.Add(productionLine).Result; // TODO make proper async
+                            return addResult.Match<ShutDownProductionLineResult>(
+                                success => new ShutDownProductionLineResult.Success(),
+                                notReachable => new ShutDownProductionLineResult.NotReachable(),
+                                error => new ShutDownProductionLineResult.Error(error.Exception)
+                            );
+                        }),
                 () => new ShutDownProductionLineResult.NotAvailable());
 
             return result;

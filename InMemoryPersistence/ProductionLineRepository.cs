@@ -91,5 +91,27 @@ namespace RoboPlant.InMemoryPersistence
                 result.State);
             return Task.FromResult<GetByIdResult<ProductionLine>>(new GetByIdResult<ProductionLine>.Success(productionLine));
         }
+
+        public Task<AddResult<ProductionLineId>> Add(ProductionLine productionLine)
+        {
+            var model = new ProductionLineModel
+            {
+                Id = productionLine.Id.Value,
+                HumanReadableName = productionLine.HumanReadableName,
+                State = productionLine.State
+            };
+
+            try
+            {
+                this.internalRepository.Add(model);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return Task.FromResult<AddResult<ProductionLineId>>(new AddResult<ProductionLineId>.Error(e));
+            }
+
+            return Task.FromResult<AddResult<ProductionLineId>>(new AddResult<ProductionLineId>.Success(new ProductionLineId(productionLine.Id.Value)));
+        }
     }
 }
