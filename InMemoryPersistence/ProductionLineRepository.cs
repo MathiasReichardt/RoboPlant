@@ -64,7 +64,7 @@ namespace RoboPlant.InMemoryPersistence
             var resultList = result
                             .Select(m => new ProductionLine(new ProductionLineId(m.Id), m.HumanReadableName, m.State))
                             .ToList();
-            return Task.FromResult< GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Success(resultList));
+            return Task.FromResult<GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Success(resultList));
         }
 
         public Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId)
