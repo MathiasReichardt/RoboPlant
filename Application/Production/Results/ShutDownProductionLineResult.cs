@@ -12,7 +12,7 @@ namespace RoboPlant.Application.Production.Results
             Action<NotFound> notFound,
             Action<NotReachable> notReachable,
             Action<Error> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notAvailable, notFound, notReachable, error);
 
         public TMatchResult Match<TMatchResult>(
             Func<Success, TMatchResult> success,
@@ -20,7 +20,7 @@ namespace RoboPlant.Application.Production.Results
             Func<NotFound, TMatchResult> notFound,
             Func<NotReachable, TMatchResult> notReachable,
             Func<Error, TMatchResult> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notAvailable, notFound, notReachable, error);
 
         public Task<TMatchResult> Match<TMatchResult>(
             Func<Success, Task<TMatchResult>> success,
@@ -28,7 +28,7 @@ namespace RoboPlant.Application.Production.Results
             Func<NotFound, Task<TMatchResult>> notFound,
             Func<NotReachable, Task<TMatchResult>> notReachable,
             Func<Error, Task<TMatchResult>> error)
-            => this.TypeMatch(success, notFound, notReachable, error);
+            => this.TypeMatch(success, notAvailable, notFound, notReachable, error);
 
 
         public sealed class Success : ShutDownProductionLineResult
