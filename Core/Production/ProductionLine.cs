@@ -1,5 +1,6 @@
 ﻿using System;
 using Optional;
+using RoboPlant.Util.PatternMatching;
 
 namespace RoboPlant.Domain.Production
 {
@@ -11,7 +12,7 @@ namespace RoboPlant.Domain.Production
 
         public ProductionLineState State { get; private set; }
 
-        public Option<Func<Option<Exception>>> ShutDownForMaintenance { get; private set; } = Option.None<Func<Option<Exception>>>();
+        public Option<Func<Result<Exception>>> ShutDownForMaintenance { get; private set; } = Option.None<Func<Result<Exception>>>();
 
         public ProductionLine(ProductionLineId id, string humanReadableName, ProductionLineState state)
         {
@@ -23,7 +24,7 @@ namespace RoboPlant.Domain.Production
 
         private void SetAvailableActions()
         {
-            ShutDownForMaintenance = IsAvailable_ShutdShutDownForMaintenance() ? Option.Some<Func<Option<Exception>>>(Execute_ShutdShutDownForMaintenance) : Option.None<Func<Option<Exception>>>();
+            ShutDownForMaintenance = IsAvailable_ShutdShutDownForMaintenance() ? Option.Some<Func<Result<Exception>>>(Execute_ShutdShutDownForMaintenance) : Option.None<Func<Result<Exception>>>();
         }
 
         private bool IsAvailable_ShutdShutDownForMaintenance()
@@ -31,11 +32,11 @@ namespace RoboPlant.Domain.Production
             return this.State == ProductionLineState.Idle;
         }
 
-        private Option<Exception> Execute_ShutdShutDownForMaintenance()
+        private Result<Exception> Execute_ShutdShutDownForMaintenance()
         {
             this.State = ProductionLineState.OutOfOrder;
             SetAvailableActions();
-            return Option.None<Exception>();
+            return new Result<Exception>.Success();
         }
     }
 }
