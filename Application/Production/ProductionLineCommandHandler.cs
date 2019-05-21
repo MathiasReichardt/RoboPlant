@@ -47,11 +47,10 @@ namespace RoboPlant.Application.Production
             return result;
         }
         
-        private async Task<ShutDownProductionLineResult> InvokeAction(Func<Result<Exception>> action,
-            ProductionLine productionLine)
+        private async Task<ShutDownProductionLineResult> InvokeAction(Func<Result<Exception>> action, ProductionLine productionLine)
         {
-            return action.Invoke().Match<Task<ShutDownProductionLineResult>>(
-                success: async () =>
+            return await action().Match(
+                success: async _ =>
                 {
                     var addResult = await this.productionLineRepository.Add(productionLine);
                     var shutDownProductionLineResult = addResult.Match<ShutDownProductionLineResult>(
@@ -61,7 +60,7 @@ namespace RoboPlant.Application.Production
                     );
                     return shutDownProductionLineResult;
                 },
-                failure: async failure => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.Error(failure.Error))
+                failure: failure => Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.Error(failure.Error))
             );
         }
     }
