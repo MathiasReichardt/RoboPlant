@@ -35,7 +35,7 @@ namespace RoboPlant.Server.REST.ProductionLine
                 error => this.Problem(ProblemFactory.Exception(error.Exception)));
         }
 
-        [HttpPostHypermediaAction("{productionLineId:Guid}/ShutDown", typeof(ShutDown))]
+        [HttpPostHypermediaAction("{productionLineId:Guid}/ShutDownForMaintenance", typeof(ShutDown))]
         public async Task<ActionResult> ShutDown(Guid productionLineId)
         {
             var shutDownResult = await this.CommandHandler.ShutDownProductionLine(productionLineId);

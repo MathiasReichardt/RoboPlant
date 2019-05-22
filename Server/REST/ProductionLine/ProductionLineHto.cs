@@ -26,7 +26,7 @@ namespace RoboPlant.Server.REST.ProductionLine
 
         public string Name { get; set; }
 
-        [HypermediaAction(Name = "ShutDown", Title = "Shuts down the production line in an orderly fashion.")]
+        [HypermediaAction(Name = "ShutDownForMaintenance", Title = "Shuts down the production line in an orderly fashion.")]
         public ShutDown ShutDown { get; set; }
     }
 
