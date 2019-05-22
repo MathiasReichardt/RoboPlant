@@ -54,7 +54,9 @@ namespace RoboPlant.Server
             // DI for application
             services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
             services.AddTransient<ProductionCommandHandler>();
-            services.AddTransient<ProductionLineCommandHandler>();
+            services.AddTransient<GetByIdCommandHandler>();
+            services.AddTransient<ShutDownForMaintenanceCommandHandler>();
+            services.AddTransient<CompleteMaintenanceCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

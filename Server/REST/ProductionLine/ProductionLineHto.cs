@@ -15,7 +15,8 @@ namespace RoboPlant.Server.REST.ProductionLine
             this.Id = productionLine.Id.Value;
             this.Name = productionLine.HumanReadableName;
             this.State = productionLine.State;
-            this.ShutDown = new ShutDown(() => productionLine.ShutDownForMaintenance.HasValue, () => {}); // we dont need the execute
+            this.ShutDownForMaintenance = new ShutDownForMaintenance(() => productionLine.ShutDownForMaintenance.HasValue, () => {}); // we dont need the execute
+            this.CompleteMaintenance = new CompleteMaintenance(() => productionLine.CompleteMaintenance.HasValue, () => {});          // we dont need the execute
         }
 
         [Key]
@@ -26,13 +27,23 @@ namespace RoboPlant.Server.REST.ProductionLine
 
         public string Name { get; set; }
 
-        [HypermediaAction(Name = "ShutDownForMaintenance", Title = "Shuts down the production line in an orderly fashion.")]
-        public ShutDown ShutDown { get; set; }
+        [HypermediaAction(Name = "ShutDownForMaintenance", Title = "Shuts down the production line in an orderly fashion to do maintenance.")]
+        public ShutDownForMaintenance ShutDownForMaintenance { get; set; }
+
+        [HypermediaAction(Name = "CompleteMaintenance", Title = "Completes the maintenance of the production line.")]
+        public CompleteMaintenance CompleteMaintenance { get; set; }
     }
 
-    public class ShutDown : HypermediaAction
+    public class ShutDownForMaintenance : HypermediaAction
     {
-        public ShutDown(Func<bool> canExecute, Action command) : base(canExecute, command)
+        public ShutDownForMaintenance(Func<bool> canExecute, Action command) : base(canExecute, command)
+        {
+        }
+    }
+
+    public class CompleteMaintenance : HypermediaAction
+    {
+        public CompleteMaintenance(Func<bool> canExecute, Action command) : base(canExecute, command)
         {
         }
     }

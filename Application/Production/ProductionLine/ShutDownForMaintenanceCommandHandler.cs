@@ -8,23 +8,16 @@ using RoboPlant.Util.PatternMatching;
 
 namespace RoboPlant.Application.Production
 {
-    public class ProductionLineCommandHandler
+    public class ShutDownForMaintenanceCommandHandler
     {
         private readonly IProductionLineRepository productionLineRepository;
 
-        public ProductionLineCommandHandler(IProductionLineRepository productionLineRepository)
+        public ShutDownForMaintenanceCommandHandler(IProductionLineRepository productionLineRepository)
         {
             this.productionLineRepository = productionLineRepository;
         }
 
-        public Task<GetByIdResult<ProductionLine>> GetById(Guid productionLineId)
-        {
-            var result = this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
-
-            return result;
-        }
-
-        public async Task<ShutDownForMaintenanceResult> ShutDownProductionLine(Guid productionLineId)
+        public async Task<ShutDownForMaintenanceResult> ShutDownForMaintenance(Guid productionLineId)
         {
             var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
 

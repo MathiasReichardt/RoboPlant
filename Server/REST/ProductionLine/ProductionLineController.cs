@@ -12,22 +12,28 @@ namespace RoboPlant.Server.REST.ProductionLine
     [ApiController]
     public class ProductionLineController : Controller
     {
-        private ProductionLineCommandHandler CommandHandler { get; }
+        private GetByIdCommandHandler GetByIdCommandHandler { get; }
+        private ShutDownForMaintenanceCommandHandler ShutDownForMaintenanceCommandHandler { get; }
+        public CompleteMaintenanceCommandHandler CompleteMaintenanceCommandHandler { get; }
 
         private IProblemFactory ProblemFactory { get; }
 
-        public ProductionLineController(ProductionLineCommandHandler commandHandler, IProblemFactory problemFactory)
+        public ProductionLineController(
+            GetByIdCommandHandler getByIdCommandHandler,
+            ShutDownForMaintenanceCommandHandler shutDownForMaintenanceCommandHandler,
+            CompleteMaintenanceCommandHandler completeMaintenanceCommandHandler,
+            IProblemFactory problemFactory)
         {
-            CommandHandler = commandHandler;
+            GetByIdCommandHandler = getByIdCommandHandler;
+            ShutDownForMaintenanceCommandHandler = shutDownForMaintenanceCommandHandler;
+            CompleteMaintenanceCommandHandler = completeMaintenanceCommandHandler;
             ProblemFactory = problemFactory;
         }
 
         [HttpGetHypermediaObject("{productionLineId}", typeof(ProductionLineHto))]
-        public async Task<ActionResult> GetProductionLinesAsync(Guid productionLineId)
+        public async Task<ActionResult> GetProductionLineAsync(Guid productionLineId)
         {
-            var byIdResult = await this.CommandHandler.GetById(productionLineId);
-
-
+            var byIdResult = await this.GetByIdCommandHandler.GetById(productionLineId);
             return byIdResult.Match(
                 success => Ok(new ProductionLineHto(success.Result)),
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
@@ -35,13 +41,25 @@ namespace RoboPlant.Server.REST.ProductionLine
                 error => this.Problem(ProblemFactory.Exception(error.Exception)));
         }
 
-        [HttpPostHypermediaAction("{productionLineId:Guid}/ShutDownForMaintenance", typeof(ShutDown))]
-        public async Task<ActionResult> ShutDown(Guid productionLineId)
+        [HttpPostHypermediaAction("{productionLineId:Guid}/ShutDownForMaintenance", typeof(ShutDownForMaintenance))]
+        public async Task<ActionResult> ShutDownForMaintenance(Guid productionLineId)
         {
-            var shutDownResult = await this.CommandHandler.ShutDownProductionLine(productionLineId);
-            return shutDownResult.Match<ActionResult>(
+            var shutDownResult = await this.ShutDownForMaintenanceCommandHandler.ShutDownForMaintenance(productionLineId);
+            return shutDownResult.Match(
                 success => Ok(),
                 notAvailable => this.CanNotExecute(), 
+                notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
+                notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
+                error => this.Problem(ProblemFactory.Exception(error.Exception)));
+        }
+
+        [HttpPostHypermediaAction("{productionLineId:Guid}/CompleteMaintenance", typeof(CompleteMaintenance))]
+        public async Task<ActionResult> CompleteMaintenance(Guid productionLineId)
+        {
+            var shutDownResult = await this.CompleteMaintenanceCommandHandler.CompleteMaintenance(productionLineId);
+            return shutDownResult.Match(
+                success => Ok(),
+                notAvailable => this.CanNotExecute(),
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
                 error => this.Problem(ProblemFactory.Exception(error.Exception)));
