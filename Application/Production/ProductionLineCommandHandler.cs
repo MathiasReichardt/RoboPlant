@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Optional;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Application.Production.Results;
