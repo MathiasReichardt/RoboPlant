@@ -29,7 +29,7 @@ namespace RoboPlant.Application.Production
             var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             var result = await getProductionLineResult.Match<Task<ShutDownProductionLineResult>>(
-                async success => await ExecuteAction(success.Result),
+                async success => await ExecuteShutDown(success.Result),
                 async notFound => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.NotFound()),
                 async notReachablereachable => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.NotReachable()),
                 async error => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.Error(error.Exception)));
@@ -37,16 +37,16 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        private async Task<ShutDownProductionLineResult> ExecuteAction(ProductionLine productionLine)
+        private async Task<ShutDownProductionLineResult> ExecuteShutDown(ProductionLine productionLine)
         {
             var result = await productionLine.ShutDownForMaintenance.Match<Task<ShutDownProductionLineResult>>(
-                async action => await InvokeAction(action, productionLine),
+                async action => await InvokeShutDown(action, productionLine),
                 async () => await Task.FromResult(new ShutDownProductionLineResult.NotAvailable()));
 
             return result;
         }
         
-        private async Task<ShutDownProductionLineResult> InvokeAction(Func<Result<Exception>> action, ProductionLine productionLine)
+        private async Task<ShutDownProductionLineResult> InvokeShutDown(Func<Result<Exception>> action, ProductionLine productionLine)
         {
             return await action().Match(
                 success: async _ =>
