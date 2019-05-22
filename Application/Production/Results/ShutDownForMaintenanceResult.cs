@@ -4,7 +4,7 @@ using Util.PatternMatching;
 
 namespace RoboPlant.Application.Production.Results
 {
-    public abstract class ShutDownProductionLineResult
+    public abstract class ShutDownForMaintenanceResult
     {
         public void Match(
             Action<Success> success,
@@ -31,35 +31,35 @@ namespace RoboPlant.Application.Production.Results
             => this.TypeMatch(success, notAvailable, notFound, notReachable, error);
 
 
-        public sealed class Success : ShutDownProductionLineResult
+        public sealed class Success : ShutDownForMaintenanceResult
         {
             public Success()
             {
             }
         }
 
-        public sealed class NotAvailable : ShutDownProductionLineResult
+        public sealed class NotAvailable : ShutDownForMaintenanceResult
         {
             public NotAvailable()
             {
             }
         }
 
-        public sealed class NotFound : ShutDownProductionLineResult
+        public sealed class NotFound : ShutDownForMaintenanceResult
         {
             public NotFound()
             {
             }
         }
 
-        public sealed class NotReachable : ShutDownProductionLineResult
+        public sealed class NotReachable : ShutDownForMaintenanceResult
         {
             public NotReachable()
             {
             }
         }
 
-        public sealed class Error : ShutDownProductionLineResult
+        public sealed class Error : ShutDownForMaintenanceResult
         {
             public Exception Exception { get; }
 

@@ -24,42 +24,42 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        public async Task<ShutDownProductionLineResult> ShutDownProductionLine(Guid productionLineId)
+        public async Task<ShutDownForMaintenanceResult> ShutDownProductionLine(Guid productionLineId)
         {
             var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
-            var result = await getProductionLineResult.Match<Task<ShutDownProductionLineResult>>(
+            var result = await getProductionLineResult.Match<Task<ShutDownForMaintenanceResult>>(
                 async success => await ExecuteShutDown(success.Result),
-                async notFound => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.NotFound()),
-                async notReachablereachable => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.NotReachable()),
-                async error => await Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.Error(error.Exception)));
+                async notFound => await Task.FromResult<ShutDownForMaintenanceResult>(new ShutDownForMaintenanceResult.NotFound()),
+                async notReachablereachable => await Task.FromResult<ShutDownForMaintenanceResult>(new ShutDownForMaintenanceResult.NotReachable()),
+                async error => await Task.FromResult<ShutDownForMaintenanceResult>(new ShutDownForMaintenanceResult.Error(error.Exception)));
 
             return result;
         }
 
-        private async Task<ShutDownProductionLineResult> ExecuteShutDown(ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> ExecuteShutDown(ProductionLine productionLine)
         {
-            var result = await productionLine.ShutDownForMaintenance.Match<Task<ShutDownProductionLineResult>>(
+            var result = await productionLine.ShutDownForMaintenance.Match<Task<ShutDownForMaintenanceResult>>(
                 async action => await InvokeShutDown(action, productionLine),
-                async () => await Task.FromResult(new ShutDownProductionLineResult.NotAvailable()));
+                async () => await Task.FromResult(new ShutDownForMaintenanceResult.NotAvailable()));
 
             return result;
         }
         
-        private async Task<ShutDownProductionLineResult> InvokeShutDown(Func<Result<Exception>> action, ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> InvokeShutDown(Func<Result<Exception>> action, ProductionLine productionLine)
         {
             return await action().Match(
                 success: async _ =>
                 {
                     var addResult = await this.productionLineRepository.Add(productionLine);
-                    var shutDownProductionLineResult = addResult.Match<ShutDownProductionLineResult>(
-                        success => new ShutDownProductionLineResult.Success(),
-                        notReachable => new ShutDownProductionLineResult.NotReachable(),
-                        error => new ShutDownProductionLineResult.Error(error.Exception)
+                    var shutDownProductionLineResult = addResult.Match<ShutDownForMaintenanceResult>(
+                        success => new ShutDownForMaintenanceResult.Success(),
+                        notReachable => new ShutDownForMaintenanceResult.NotReachable(),
+                        error => new ShutDownForMaintenanceResult.Error(error.Exception)
                     );
                     return shutDownProductionLineResult;
                 },
-                failure: failure => Task.FromResult<ShutDownProductionLineResult>(new ShutDownProductionLineResult.Error(failure.Error))
+                failure: failure => Task.FromResult<ShutDownForMaintenanceResult>(new ShutDownForMaintenanceResult.Error(failure.Error))
             );
         }
     }
