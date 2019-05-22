@@ -13,6 +13,7 @@ namespace RoboPlant.Domain.Production
         public ProductionLineState State { get; private set; }
 
         public Option<Func<Result<Exception>>> ShutDownForMaintenance { get; private set; } = Option.None<Func<Result<Exception>>>();
+        public Option<Func<Result<Exception>>> CompleteMaintenance { get; private set; } = Option.None<Func<Result<Exception>>>();
 
         public ProductionLine(ProductionLineId id, string humanReadableName, ProductionLineState state)
         {
@@ -24,17 +25,30 @@ namespace RoboPlant.Domain.Production
 
         private void SetAvailableActions()
         {
-            ShutDownForMaintenance = IsAvailable_ShutdShutDownForMaintenance() ? Option.Some<Func<Result<Exception>>>(Execute_ShutdShutDownForMaintenance) : Option.None<Func<Result<Exception>>>();
+            ShutDownForMaintenance = IsAvailable_ShutDownForMaintenance() ? Option.Some<Func<Result<Exception>>>(Execute_ShutDownForMaintenance) : Option.None<Func<Result<Exception>>>();
+            CompleteMaintenance = IsAvailable_CompleteMaintenance() ? Option.Some<Func<Result<Exception>>>(Execute_CompleteMaintenance) : Option.None<Func<Result<Exception>>>();
         }
 
-        private bool IsAvailable_ShutdShutDownForMaintenance()
+        private bool IsAvailable_ShutDownForMaintenance()
         {
             return this.State == ProductionLineState.Idle;
         }
 
-        private Result<Exception> Execute_ShutdShutDownForMaintenance()
+        private Result<Exception> Execute_ShutDownForMaintenance()
         {
-            this.State = ProductionLineState.OutOfOrder;
+            this.State = ProductionLineState.Maintenance;
+            SetAvailableActions();
+            return new Result<Exception>.Success();
+        }
+
+        private bool IsAvailable_CompleteMaintenance()
+        {
+            return this.State == ProductionLineState.Maintenance;
+        }
+
+        private Result<Exception> Execute_CompleteMaintenance()
+        {
+            this.State = ProductionLineState.Idle;
             SetAvailableActions();
             return new Result<Exception>.Success();
         }

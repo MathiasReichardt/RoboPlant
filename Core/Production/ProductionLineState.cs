@@ -2,7 +2,7 @@
 {
     public enum ProductionLineState
     {
-        OutOfOrder,
+        Maintenance,
         Busy,
         Idle
     }
