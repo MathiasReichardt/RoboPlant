@@ -46,7 +46,7 @@ namespace RoboPlant.Server.REST.ProductionLine
         {
             var shutDownResult = await this.ShutDownForMaintenanceCommandHandler.ShutDownForMaintenance(productionLineId);
             return shutDownResult.Match(
-                success => Ok(),
+                success => NoContent(),
                 notAvailable => this.CanNotExecute(), 
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
@@ -58,7 +58,7 @@ namespace RoboPlant.Server.REST.ProductionLine
         {
             var shutDownResult = await this.CompleteMaintenanceCommandHandler.CompleteMaintenance(productionLineId);
             return shutDownResult.Match(
-                success => Ok(),
+                success => NoContent(),
                 notAvailable => this.CanNotExecute(),
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
