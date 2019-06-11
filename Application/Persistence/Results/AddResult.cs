@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RoboPlant.Domain.Ids;
-using Util.PatternMatching;
+using RoboPlant.Util.PatternMatching;
 
 namespace RoboPlant.Application.Persistence.Results
 {
@@ -38,9 +38,6 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotReachable : AddResult<TId>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : AddResult<TId>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
 
 namespace RoboPlant.Util.PatternMatching
 {
@@ -63,9 +62,6 @@ namespace RoboPlant.Util.PatternMatching
 
         public sealed class Success : Result<TError>
         {
-            public Success()
-            {
-            }
         }
 
         public sealed class Failure : Result<TError>

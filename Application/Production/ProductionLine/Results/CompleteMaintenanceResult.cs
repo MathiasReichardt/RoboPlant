@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
+using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production.Results
+namespace RoboPlant.Application.Production.ProductionLine.Results
 {
     public abstract class CompleteMaintenanceResult
     {
@@ -33,30 +33,18 @@ namespace RoboPlant.Application.Production.Results
 
         public sealed class Success : CompleteMaintenanceResult
         {
-            public Success()
-            {
-            }
         }
 
         public sealed class NotAvailable : CompleteMaintenanceResult
         {
-            public NotAvailable()
-            {
-            }
         }
 
         public sealed class NotFound : CompleteMaintenanceResult
         {
-            public NotFound()
-            {
-            }
         }
 
         public sealed class NotReachable : CompleteMaintenanceResult
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : CompleteMaintenanceResult

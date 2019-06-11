@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
-using RoboPlant.Application.Persistence.Results;
-using RoboPlant.Application.Production.Results;
+using RoboPlant.Application.Production.ProductionLine.Results;
 using RoboPlant.Domain.Production;
 using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production
+namespace RoboPlant.Application.Production.ProductionLine
 {
     public class ShutDownForMaintenanceCommandHandler
     {
@@ -19,7 +18,7 @@ namespace RoboPlant.Application.Production
 
         public async Task<ShutDownForMaintenanceResult> ShutDownForMaintenance(Guid productionLineId)
         {
-            var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
+            var getProductionLineResult = await productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             var result = await getProductionLineResult.Match<Task<ShutDownForMaintenanceResult>>(
                 async success => await ExecuteShutDown(success.Result),
@@ -30,7 +29,7 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        private async Task<ShutDownForMaintenanceResult> ExecuteShutDown(ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> ExecuteShutDown(Domain.Production.ProductionLine productionLine)
         {
             var result = await productionLine.ShutDownForMaintenance.Match<Task<ShutDownForMaintenanceResult>>(
                 async action => await InvokeShutDown(action, productionLine),
@@ -39,12 +38,12 @@ namespace RoboPlant.Application.Production
             return result;
         }
         
-        private async Task<ShutDownForMaintenanceResult> InvokeShutDown(Func<Result<Exception>> action, ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> InvokeShutDown(Func<Result<Exception>> action, Domain.Production.ProductionLine productionLine)
         {
             return await action().Match(
                 success: async _ =>
                 {
-                    var addResult = await this.productionLineRepository.Add(productionLine);
+                    var addResult = await productionLineRepository.Add(productionLine);
                     var shutDownProductionLineResult = addResult.Match<ShutDownForMaintenanceResult>(
                         success => new ShutDownForMaintenanceResult.Success(),
                         notReachable => new ShutDownForMaintenanceResult.NotReachable(),

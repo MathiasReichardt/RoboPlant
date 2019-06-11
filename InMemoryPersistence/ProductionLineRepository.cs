@@ -16,8 +16,10 @@ namespace RoboPlant.InMemoryPersistence
 
         public ProductionLineRepository()
         {
-            this.internalRepository = new InMemoryRepository<ProductionLineModel, Guid>();
-            this.internalRepository.GenerateKeyOnAdd = true;
+            internalRepository = new InMemoryRepository<ProductionLineModel, Guid>
+            {
+                GenerateKeyOnAdd = true
+            };
             AddDemoData();
         }
 
@@ -45,26 +47,26 @@ namespace RoboPlant.InMemoryPersistence
                 }
             };
 
-            this.internalRepository.Add(insertItems);
+            internalRepository.Add(insertItems);
         }
 
-        public Task<GetAllResult<ICollection<ProductionLine>>> GetAll()
+        public Task<GetAllResult<ProductionLine>> GetAll()
         {
             IEnumerable<ProductionLineModel> result;
             try
             {
-                result = this.internalRepository.GetAll();
+                result = internalRepository.GetAll();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                return Task.FromResult<GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Error(e));
+                return Task.FromResult<GetAllResult<ProductionLine>>(new GetAllResult<ProductionLine>.Error(e));
             }
 
             var resultList = result
                             .Select(m => new ProductionLine(new ProductionLineId(m.Id), m.HumanReadableName, m.State))
                             .ToList();
-            return Task.FromResult<GetAllResult<ICollection<ProductionLine>>>(new GetAllResult<ICollection<ProductionLine>>.Success(resultList));
+            return Task.FromResult<GetAllResult<ProductionLine>>(new GetAllResult<ProductionLine>.Success(resultList));
         }
 
         public Task<GetByIdResult<ProductionLine>> GetById(ProductionLineId productionLineId)
@@ -72,7 +74,7 @@ namespace RoboPlant.InMemoryPersistence
             ProductionLineModel result;
             try
             {
-                result = this.internalRepository.Get(productionLineId.Value);
+                result = internalRepository.Get(productionLineId.Value);
             }
             catch (Exception e)
             {
@@ -103,7 +105,7 @@ namespace RoboPlant.InMemoryPersistence
 
             try
             {
-                this.internalRepository.Add(model);
+                internalRepository.Add(model);
             }
             catch (Exception e)
             {

@@ -22,10 +22,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:5000/api/entrypoint",
 					"protocol": "http",
@@ -46,10 +42,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:5000/api/production",
 					"protocol": "http",
@@ -70,10 +62,6 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
 					"raw": "http://localhost:5000/api/productionline/edaef8da-c0cc-4284-b50f-086e468a399c",
 					"protocol": "http",
@@ -85,6 +73,124 @@
 						"api",
 						"productionline",
 						"edaef8da-c0cc-4284-b50f-086e468a399c"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Design",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/design",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"design"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Query Blueprints",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t  \"ModelName\": \"R2D2\",\r\n\t  \"MaxProductionEfford\": 60\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/design/queries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"design",
+						"queries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryResult",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/design/query?ModelName=R2&MaxProductionEfford=65",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"design",
+						"query"
+					],
+					"query": [
+						{
+							"key": "ModelName",
+							"value": "R2"
+						},
+						{
+							"key": "MaxProductionEfford",
+							"value": "65"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Blueprint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/robotblueprint/9632d538-b44e-4034-b6ca-19ee4441000b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"robotblueprint",
+						"9632d538-b44e-4034-b6ca-19ee4441000b"
 					]
 				}
 			},

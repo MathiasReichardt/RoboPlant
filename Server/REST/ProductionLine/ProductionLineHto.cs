@@ -12,11 +12,11 @@ namespace RoboPlant.Server.REST.ProductionLine
     {
         public ProductionLineHto(Domain.Production.ProductionLine productionLine)
         {
-            this.Id = productionLine.Id.Value;
-            this.Name = productionLine.HumanReadableName;
-            this.State = productionLine.State;
-            this.ShutDownForMaintenance = new ShutDownForMaintenance(() => productionLine.ShutDownForMaintenance.HasValue, () => {}); // we dont need the execute
-            this.CompleteMaintenance = new CompleteMaintenance(() => productionLine.CompleteMaintenance.HasValue, () => {});          // we dont need the execute
+            Id = productionLine.Id.Value;
+            Name = productionLine.HumanReadableName;
+            State = productionLine.State;
+            ShutDownForMaintenance = new ShutDownForMaintenance(() => productionLine.ShutDownForMaintenance.HasValue, () => {}); // we dont need the execute
+            CompleteMaintenance = new CompleteMaintenance(() => productionLine.CompleteMaintenance.HasValue, () => {});          // we dont need the execute
         }
 
         [Key]

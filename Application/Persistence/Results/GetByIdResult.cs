@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
+using RoboPlant.Util.PatternMatching;
 
 namespace RoboPlant.Application.Persistence.Results
 {
@@ -40,16 +40,10 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotFound : GetByIdResult<TResult>
         {
-            public NotFound()
-            {
-            }
         }
 
         public sealed class NotReachable : GetByIdResult<TResult>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : GetByIdResult<TResult>

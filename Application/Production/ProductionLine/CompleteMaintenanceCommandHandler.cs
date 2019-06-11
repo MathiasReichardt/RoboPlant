@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
-using RoboPlant.Application.Production.Results;
+using RoboPlant.Application.Production.ProductionLine.Results;
 using RoboPlant.Domain.Production;
 using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production
+namespace RoboPlant.Application.Production.ProductionLine
 {
     public class CompleteMaintenanceCommandHandler
     {
@@ -18,7 +18,7 @@ namespace RoboPlant.Application.Production
 
         public async Task<CompleteMaintenanceResult> CompleteMaintenance(Guid productionLineId)
         {
-            var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
+            var getProductionLineResult = await productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             var result = await getProductionLineResult.Match<Task<CompleteMaintenanceResult>>(
                 async success => await ExecuteCompleteMaintenance(success.Result),
@@ -29,7 +29,7 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        private async Task<CompleteMaintenanceResult> ExecuteCompleteMaintenance(ProductionLine productionLine)
+        private async Task<CompleteMaintenanceResult> ExecuteCompleteMaintenance(Domain.Production.ProductionLine productionLine)
         {
             var result = await productionLine.CompleteMaintenance.Match<Task<CompleteMaintenanceResult>>(
                 async action => await InvokeCompleteMaintenance(action, productionLine),
@@ -38,12 +38,12 @@ namespace RoboPlant.Application.Production
             return result;
         }
         
-        private async Task<CompleteMaintenanceResult> InvokeCompleteMaintenance(Func<Result<Exception>> action, ProductionLine productionLine)
+        private async Task<CompleteMaintenanceResult> InvokeCompleteMaintenance(Func<Result<Exception>> action, Domain.Production.ProductionLine productionLine)
         {
             return await action().Match(
                 success: async _ =>
                 {
-                    var addResult = await this.productionLineRepository.Add(productionLine);
+                    var addResult = await productionLineRepository.Add(productionLine);
                     var shutDownProductionLineResult = addResult.Match<CompleteMaintenanceResult>(
                         success => new CompleteMaintenanceResult.Success(),
                         notReachable => new CompleteMaintenanceResult.NotReachable(),

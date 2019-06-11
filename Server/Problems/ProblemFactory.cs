@@ -16,13 +16,13 @@ namespace RoboPlant.Server.Problems
         {
             if (environment.IsDevelopment())
             {
-                this.AddExceptionInformation = true;
+                AddExceptionInformation = true;
             }
         }
 
         public ProblemJson NotFound()
         {
-            return  new ProblemJson
+            return new ProblemJson
             {
                 Title = "Route not found",
                 Detail = "Requested a route which is not valid.",
@@ -44,13 +44,35 @@ namespace RoboPlant.Server.Problems
 
         public ProblemJson ServiceUnavailable()
         {
-            
+
             return new ProblemJson
             {
                 Title = "Service is not available",
-                Detail = $"Requestcould not be fullfilled because a required service is not available. Pease retry later.",
+                Detail = "Requestcould not be fullfilled because a required service is not available. Pease retry later.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".ServiceUnavailable",
                 StatusCode = StatusCodes.Status503ServiceUnavailable
+            };
+        }
+
+        public ProblemJson BadParameters()
+        {
+            return new ProblemJson
+            {
+                Title = "Bad Parameters",
+                Detail = "Can not execute action because the provided parameters are now acceptable. Review the parameter schema.",
+                ProblemType = RoboPlantProblemTypeNamespace + ".BadParameters",
+                StatusCode = 400
+            };
+        }
+
+        public ProblemJson OperationNotAvailable()
+        {
+            return new ProblemJson
+            {
+                Title = "Operation is not available",
+                Detail = "Can not execute action because the operation can not be executed in the current state.",
+                ProblemType = RoboPlantProblemTypeNamespace + ".OperationNotAvailable",
+                StatusCode = 403
             };
         }
 
@@ -59,9 +81,9 @@ namespace RoboPlant.Server.Problems
             return new ExceptionProblemJson(hypermediaFormatterException)
             {
                 Title = "Hypermedia formatter error.",
-                ProblemType = RoboPlantProblemTypeNamespace+ ".HyperrmediaFormatterError",
+                ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaFormatterError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(hypermediaFormatterException)
+                Detail = AddExceptionDetail(hypermediaFormatterException)
             };
         }
 
@@ -72,7 +94,7 @@ namespace RoboPlant.Server.Problems
                 Title = "Hypermedia error.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(hypermediaException)
+                Detail = AddExceptionDetail(hypermediaException)
             };
         }
 
@@ -83,7 +105,7 @@ namespace RoboPlant.Server.Problems
                 Title = "Sorry, something went wrong.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".InternalError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(exception)
+                Detail = AddExceptionDetail(exception)
             };
         }
 

@@ -1,16 +1,19 @@
 ﻿using System;
-using RoboPlant.Domain.Production;
 using SharpRepository.Repository;
 
 namespace RoboPlant.InMemoryPersistence.Models
 {
-    internal class ProductionLineModel
+    internal class RobotBlueprintModel
     {
         [RepositoryPrimaryKey]
         public Guid Id { get; set; }
 
+        public long Version { get; set; }
+
         public string HumanReadableName { get; set; }
 
-        public ProductionLineState State { get; set; }
+        public string Description { get; set; }
+
+        public long ProductionEfford { get; set; }
     }
 }

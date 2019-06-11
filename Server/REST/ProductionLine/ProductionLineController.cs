@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using RoboPlant.Application.Production;
+using RoboPlant.Application.Production.ProductionLine;
 using RoboPlant.Server.Problems;
 using WebApi.HypermediaExtensions.WebApi.AttributedRoutes;
 using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
@@ -33,7 +33,7 @@ namespace RoboPlant.Server.REST.ProductionLine
         [HttpGetHypermediaObject("{productionLineId}", typeof(ProductionLineHto))]
         public async Task<ActionResult> GetProductionLineAsync(Guid productionLineId)
         {
-            var byIdResult = await this.GetByIdCommandHandler.GetById(productionLineId);
+            var byIdResult = await GetByIdCommandHandler.GetById(productionLineId);
             return byIdResult.Match(
                 success => Ok(new ProductionLineHto(success.Result)),
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
@@ -44,9 +44,9 @@ namespace RoboPlant.Server.REST.ProductionLine
         [HttpPostHypermediaAction("{productionLineId:Guid}/ShutDownForMaintenance", typeof(ShutDownForMaintenance))]
         public async Task<ActionResult> ShutDownForMaintenance(Guid productionLineId)
         {
-            var shutDownResult = await this.ShutDownForMaintenanceCommandHandler.ShutDownForMaintenance(productionLineId);
+            var shutDownResult = await ShutDownForMaintenanceCommandHandler.ShutDownForMaintenance(productionLineId);
             return shutDownResult.Match(
-                success => Ok(),
+                success => NoContent(),
                 notAvailable => this.CanNotExecute(), 
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
@@ -56,9 +56,9 @@ namespace RoboPlant.Server.REST.ProductionLine
         [HttpPostHypermediaAction("{productionLineId:Guid}/CompleteMaintenance", typeof(CompleteMaintenance))]
         public async Task<ActionResult> CompleteMaintenance(Guid productionLineId)
         {
-            var shutDownResult = await this.CompleteMaintenanceCommandHandler.CompleteMaintenance(productionLineId);
+            var shutDownResult = await CompleteMaintenanceCommandHandler.CompleteMaintenance(productionLineId);
             return shutDownResult.Match(
-                success => Ok(),
+                success => NoContent(),
                 notAvailable => this.CanNotExecute(),
                 notFound => this.Problem(ProblemFactory.EntityNotFound(typeof(ProductionLineHto).Name, productionLineId.ToString())),
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
+using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production.Results
+namespace RoboPlant.Application.Production.ProductionLine.Results
 {
     public abstract class ShutDownForMaintenanceResult
     {
@@ -33,30 +33,18 @@ namespace RoboPlant.Application.Production.Results
 
         public sealed class Success : ShutDownForMaintenanceResult
         {
-            public Success()
-            {
-            }
         }
 
         public sealed class NotAvailable : ShutDownForMaintenanceResult
         {
-            public NotAvailable()
-            {
-            }
         }
 
         public sealed class NotFound : ShutDownForMaintenanceResult
         {
-            public NotFound()
-            {
-            }
         }
 
         public sealed class NotReachable : ShutDownForMaintenanceResult
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : ShutDownForMaintenanceResult

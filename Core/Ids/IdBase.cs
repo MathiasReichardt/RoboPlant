@@ -18,6 +18,12 @@ namespace RoboPlant.Domain.Ids
 
         public static bool operator ==(IdBase l, IdBase r)
         {
+            if (l == null && r != null ||
+                l != null && r == null)
+            {
+                return false;
+            }
+
             return l.Value == r.Value;
         }
 
@@ -35,7 +41,7 @@ namespace RoboPlant.Domain.Ids
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((IdBase) obj);
         }
 
