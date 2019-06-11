@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Persistence.Results;
-using RoboPlant.Domain.Production;
 
 namespace RoboPlant.Application.Production
 {
@@ -14,7 +13,7 @@ namespace RoboPlant.Application.Production
             this.productionLineRepository = productionLineRepository;
         }
 
-        public Task<GetAllResult<ProductionLine>> GetAllProductionLines()
+        public Task<GetAllResult<Domain.Production.ProductionLine>> GetAllProductionLines()
         {
             var result = this.productionLineRepository.GetAll();
             return result;

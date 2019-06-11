@@ -8,7 +8,7 @@ namespace RoboPlant.Server.REST.Design
     public class DesignHto : HypermediaObject
     {
         [HypermediaAction(Name = "NewDesignQuery", Title = "Create a new query for the Design collection.")]
-        public HypermediaAction<BlueprintQueryParameters> NewDesignQuery { get; private set; }
+        public HypermediaAction<BlueprintQueryParameters> NewDesignQuery { get; }
 
         public DesignHto()
         {

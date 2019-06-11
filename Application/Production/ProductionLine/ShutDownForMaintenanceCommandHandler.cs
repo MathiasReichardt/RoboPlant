@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
-using RoboPlant.Application.Production.Results;
+using RoboPlant.Application.Production.ProductionLine.Results;
 using RoboPlant.Domain.Production;
 using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production
+namespace RoboPlant.Application.Production.ProductionLine
 {
     public class ShutDownForMaintenanceCommandHandler
     {
@@ -29,7 +29,7 @@ namespace RoboPlant.Application.Production
             return result;
         }
 
-        private async Task<ShutDownForMaintenanceResult> ExecuteShutDown(ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> ExecuteShutDown(Domain.Production.ProductionLine productionLine)
         {
             var result = await productionLine.ShutDownForMaintenance.Match<Task<ShutDownForMaintenanceResult>>(
                 async action => await InvokeShutDown(action, productionLine),
@@ -38,7 +38,7 @@ namespace RoboPlant.Application.Production
             return result;
         }
         
-        private async Task<ShutDownForMaintenanceResult> InvokeShutDown(Func<Result<Exception>> action, ProductionLine productionLine)
+        private async Task<ShutDownForMaintenanceResult> InvokeShutDown(Func<Result<Exception>> action, Domain.Production.ProductionLine productionLine)
         {
             return await action().Match(
                 success: async _ =>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
 
 namespace RoboPlant.Util.PatternMatching
 {

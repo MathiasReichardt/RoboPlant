@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Util.PatternMatching;
+using RoboPlant.Util.PatternMatching;
 
-namespace RoboPlant.Application.Production.Results
+namespace RoboPlant.Application.Production.ProductionLine.Results
 {
     public abstract class ShutDownForMaintenanceResult
     {

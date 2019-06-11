@@ -4,7 +4,7 @@ using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Domain.Production;
 
-namespace RoboPlant.Application.Production
+namespace RoboPlant.Application.Production.ProductionLine
 {
     public class GetByIdCommandHandler
     {
@@ -15,7 +15,7 @@ namespace RoboPlant.Application.Production
             this.productionLineRepository = productionLineRepository;
         }
 
-        public Task<GetByIdResult<ProductionLine>> GetById(Guid productionLineId)
+        public Task<GetByIdResult<Domain.Production.ProductionLine>> GetById(Guid productionLineId)
         {
             var result = this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
 

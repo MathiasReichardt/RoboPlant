@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using RoboPlant.Application.Design;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Production;
+using RoboPlant.Application.Production.ProductionLine;
 using RoboPlant.InMemoryPersistence;
 using RoboPlant.Server.GlopbalExceptionHandler;
 using RoboPlant.Server.Problems;
