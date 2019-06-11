@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
-using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Application.Production.Results;
 using RoboPlant.Domain.Production;
 using RoboPlant.Util.PatternMatching;

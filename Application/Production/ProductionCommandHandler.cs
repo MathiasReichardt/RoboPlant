@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Persistence.Results;
 using RoboPlant.Domain.Production;
@@ -15,7 +14,7 @@ namespace RoboPlant.Application.Production
             this.productionLineRepository = productionLineRepository;
         }
 
-        public Task<GetAllResult<ICollection<ProductionLine>>> GetAllProductionLines()
+        public Task<GetAllResult<ProductionLine>> GetAllProductionLines()
         {
             var result = this.productionLineRepository.GetAll();
             return result;

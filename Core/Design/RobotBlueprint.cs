@@ -8,16 +8,16 @@
 
         public string HumanReadableName { get; }
 
-        public string Describtion { get; }
+        public string Description { get; }
 
         public long ProductionEfford { get; }
 
-        public RobotBlueprint(RobotBlueprintId id, long version, string humanReadableName, string describtion, long productionEfford)
+        public RobotBlueprint(RobotBlueprintId id, long version, string humanReadableName, string description, long productionEfford)
         {
             Id = id;
             Version = version;
             HumanReadableName = humanReadableName;
-            Describtion = describtion;
+            Description = description;
             ProductionEfford = productionEfford;
         }
     }

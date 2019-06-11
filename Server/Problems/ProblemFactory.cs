@@ -22,7 +22,7 @@ namespace RoboPlant.Server.Problems
 
         public ProblemJson NotFound()
         {
-            return  new ProblemJson
+            return new ProblemJson
             {
                 Title = "Route not found",
                 Detail = "Requested a route which is not valid.",
@@ -44,7 +44,7 @@ namespace RoboPlant.Server.Problems
 
         public ProblemJson ServiceUnavailable()
         {
-            
+
             return new ProblemJson
             {
                 Title = "Service is not available",
@@ -54,12 +54,34 @@ namespace RoboPlant.Server.Problems
             };
         }
 
+        public ProblemJson BadParameters()
+        {
+            return new ProblemJson
+            {
+                Title = "Bad Parameters",
+                Detail = "Can not execute action because the provided parameters are now acceptable. Review the parameter schema.",
+                ProblemType = RoboPlantProblemTypeNamespace + ".BadParameters",
+                StatusCode = 400
+            };
+        }
+
+        public ProblemJson OperationNotAvailable()
+        {
+            return new ProblemJson
+            {
+                Title = "Operation is not available",
+                Detail = "Can not execute action because the operation can not be executed in the current state.",
+                ProblemType = RoboPlantProblemTypeNamespace + ".OperationNotAvailable",
+                StatusCode = 403
+            };
+        }
+
         public ExceptionProblemJson Exception(HypermediaFormatterException hypermediaFormatterException)
         {
             return new ExceptionProblemJson(hypermediaFormatterException)
             {
                 Title = "Hypermedia formatter error.",
-                ProblemType = RoboPlantProblemTypeNamespace+ ".HyperrmediaFormatterError",
+                ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaFormatterError",
                 StatusCode = StatusCodes.Status500InternalServerError,
                 Detail = this.AddExceptionDetail(hypermediaFormatterException)
             };

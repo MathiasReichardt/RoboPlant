@@ -10,9 +10,9 @@ namespace RoboPlant.Server.REST.Production
     [HypermediaObject(Title = "Access to the available production capabilities of the RoboPlant", Classes = new[] { "Production" })]
     public class ProductionHto : HypermediaObject
     {
-        public ProductionHto(ICollection<Domain.Production.ProductionLine> productionLine)
+        public ProductionHto(ICollection<Domain.Production.ProductionLine> productionLines)
         {
-            var productionLineHtos = productionLine.Select(p => 
+            var productionLineHtos = productionLines.Select(p => 
                 new RelatedEntity("ProductionLine", new HypermediaObjectReference(new ProductionLineHto(p))));
 
             this.Entities.AddRange(productionLineHtos);

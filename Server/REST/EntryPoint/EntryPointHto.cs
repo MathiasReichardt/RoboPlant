@@ -1,4 +1,5 @@
-﻿using RoboPlant.Server.REST.Production;
+﻿using RoboPlant.Server.REST.Design;
+using RoboPlant.Server.REST.Production;
 using WebApi.HypermediaExtensions.Hypermedia;
 using WebApi.HypermediaExtensions.Hypermedia.Attributes;
 using WebApi.HypermediaExtensions.Hypermedia.Links;
@@ -11,6 +12,7 @@ namespace RoboPlant.Server.REST.EntryPoint
         public EntryPointHto()
         {
             this.Links.Add("production", new HypermediaObjectKeyReference(typeof(ProductionHto)));
+            this.Links.Add("design", new HypermediaObjectKeyReference(typeof(DesignHto)));
         }
     }
 }

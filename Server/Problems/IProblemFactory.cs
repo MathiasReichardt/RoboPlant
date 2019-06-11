@@ -17,5 +17,9 @@ namespace RoboPlant.Server.Problems
         ProblemJson EntityNotFound(string name, string id);
 
         ProblemJson ServiceUnavailable();
+
+        ProblemJson BadParameters();
+
+        ProblemJson OperationNotAvailable();
     }
 }

@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using WebApi.HypermediaExtensions.WebApi.ExtensionMethods;
 using Bluehands.Hypermedia.MediaTypes;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using RoboPlant.Application.Design;
 using RoboPlant.Application.Persistence;
 using RoboPlant.Application.Production;
 using RoboPlant.InMemoryPersistence;
@@ -18,7 +18,7 @@ namespace RoboPlant.Server
 {
     public class Startup
     {
-       // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,14 +33,16 @@ namespace RoboPlant.Server
                         NullValueHandling = NullValueHandling.Ignore,
                         DefaultValueHandling = DefaultValueHandling.Ignore
                     }, ArrayPool<char>.Shared));
-
-                // Initializes and adds the Hypermedia Extensions
-                options.AddHypermediaExtensions(
-                    hypermediaOptions: new HypermediaExtensionsOptions
-                    {
-                        ReturnDefaultRouteForUnknownHto = true
-                    });
             });
+            builder.AddJsonFormatters();
+
+            // Initializes and adds the Hypermedia Extensions
+            builder.AddHypermediaExtensions(
+                services,
+                new HypermediaExtensionsOptions
+                {
+                    ReturnDefaultRouteForUnknownHto = true
+                });
 
             // Infrastructure
             services.AddCors();
@@ -48,15 +50,16 @@ namespace RoboPlant.Server
             
             builder.AddMvcOptions(o => { o.Filters.Add(new GlobalExceptionFilter(services)); });
 
-            // Required by Hypermedia Extensions
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
             // DI for application
             services.AddSingleton<IProductionLineRepository, ProductionLineRepository>();
+            
             services.AddTransient<ProductionCommandHandler>();
             services.AddTransient<GetByIdCommandHandler>();
             services.AddTransient<ShutDownForMaintenanceCommandHandler>();
             services.AddTransient<CompleteMaintenanceCommandHandler>();
+
+            services.AddSingleton<IRobotBlueprintRepository, RobotBlueprintRepository>();
+            services.AddTransient<DesignCommandHandler>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
