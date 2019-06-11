@@ -23,12 +23,12 @@ namespace RoboPlant.Application.Design
 
         public Task<QueryResult<RobotBlueprint>> Query(BlueprintsQuery blueprintQuery)
         {
-            return this.robotBlueprintRepository.Query(blueprintQuery);
+            return robotBlueprintRepository.Query(blueprintQuery);
         }
 
         public Task<GetByIdResult<RobotBlueprint>> GetRobotBlueprintGetById(Guid blueprintId)
         {
-            return this.robotBlueprintRepository.GetById(new RobotBlueprintId(blueprintId));
+            return robotBlueprintRepository.GetById(new RobotBlueprintId(blueprintId));
         }
     }
 }

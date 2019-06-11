@@ -18,7 +18,7 @@ namespace RoboPlant.Server.REST.Production
         public ProductionController(ProductionCommandHandler commandHandler, IProblemFactory problemFactory)
         {
             ProblemFactory = problemFactory;
-            this.CommandHandler = commandHandler;
+            CommandHandler = commandHandler;
         }
 
         [HttpGetHypermediaObject(typeof(ProductionHto))]

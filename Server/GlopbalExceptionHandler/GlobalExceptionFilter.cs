@@ -22,7 +22,7 @@ namespace RoboPlant.Server.GlopbalExceptionHandler
             var loggerFactory = serviceProvider.GetService<ILoggerFactory>();
             if (loggerFactory != null)
             {
-                this.Logger = loggerFactory.CreateLogger("Global Exception Filter");
+                Logger = loggerFactory.CreateLogger("Global Exception Filter");
             }
 
             ProblemFactory = serviceProvider.GetService<IProblemFactory>();

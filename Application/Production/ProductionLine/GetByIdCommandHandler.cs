@@ -17,7 +17,7 @@ namespace RoboPlant.Application.Production.ProductionLine
 
         public Task<GetByIdResult<Domain.Production.ProductionLine>> GetById(Guid productionLineId)
         {
-            var result = this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
+            var result = productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             return result;
         }

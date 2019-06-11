@@ -17,7 +17,7 @@ namespace RoboPlant.InMemoryPersistence
 
         public RobotBlueprintRepository()
         {
-            this.internalRepository = new InMemoryRepository<RobotBlueprintModel, Guid>
+            internalRepository = new InMemoryRepository<RobotBlueprintModel, Guid>
             {
                 GenerateKeyOnAdd = true
             };
@@ -63,7 +63,7 @@ namespace RoboPlant.InMemoryPersistence
 
             };
 
-            this.internalRepository.Add(insertItems);
+            internalRepository.Add(insertItems);
         }
 
         public Task<GetAllResult<RobotBlueprint>> GetAll()
@@ -71,7 +71,7 @@ namespace RoboPlant.InMemoryPersistence
             IEnumerable<RobotBlueprintModel> result;
             try
             {
-                result = this.internalRepository.GetAll();
+                result = internalRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -90,7 +90,7 @@ namespace RoboPlant.InMemoryPersistence
             RobotBlueprintModel result;
             try
             {
-                result = this.internalRepository.Get(robotBlueprintId.Value);
+                result = internalRepository.Get(robotBlueprintId.Value);
             }
             catch (Exception e)
             {
@@ -127,7 +127,7 @@ namespace RoboPlant.InMemoryPersistence
             IList<RobotBlueprintModel> getAllResult;
             try
             {
-                getAllResult = this.internalRepository.GetAll().ToList();
+                getAllResult = internalRepository.GetAll().ToList();
             }
             catch (Exception e)
             {

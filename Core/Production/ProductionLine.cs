@@ -31,24 +31,24 @@ namespace RoboPlant.Domain.Production
 
         private bool IsAvailable_ShutDownForMaintenance()
         {
-            return this.State == ProductionLineState.Idle;
+            return State == ProductionLineState.Idle;
         }
 
         private Result<Exception> Execute_ShutDownForMaintenance()
         {
-            this.State = ProductionLineState.Maintenance;
+            State = ProductionLineState.Maintenance;
             SetAvailableActions();
             return new Result<Exception>.Success();
         }
 
         private bool IsAvailable_CompleteMaintenance()
         {
-            return this.State == ProductionLineState.Maintenance;
+            return State == ProductionLineState.Maintenance;
         }
 
         private Result<Exception> Execute_CompleteMaintenance()
         {
-            this.State = ProductionLineState.Idle;
+            State = ProductionLineState.Idle;
             SetAvailableActions();
             return new Result<Exception>.Success();
         }

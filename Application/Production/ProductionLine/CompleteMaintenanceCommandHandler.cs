@@ -18,7 +18,7 @@ namespace RoboPlant.Application.Production.ProductionLine
 
         public async Task<CompleteMaintenanceResult> CompleteMaintenance(Guid productionLineId)
         {
-            var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
+            var getProductionLineResult = await productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             var result = await getProductionLineResult.Match<Task<CompleteMaintenanceResult>>(
                 async success => await ExecuteCompleteMaintenance(success.Result),
@@ -43,7 +43,7 @@ namespace RoboPlant.Application.Production.ProductionLine
             return await action().Match(
                 success: async _ =>
                 {
-                    var addResult = await this.productionLineRepository.Add(productionLine);
+                    var addResult = await productionLineRepository.Add(productionLine);
                     var shutDownProductionLineResult = addResult.Match<CompleteMaintenanceResult>(
                         success => new CompleteMaintenanceResult.Success(),
                         notReachable => new CompleteMaintenanceResult.NotReachable(),

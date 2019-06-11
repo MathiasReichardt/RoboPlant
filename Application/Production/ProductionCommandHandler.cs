@@ -15,7 +15,7 @@ namespace RoboPlant.Application.Production
 
         public Task<GetAllResult<Domain.Production.ProductionLine>> GetAllProductionLines()
         {
-            var result = this.productionLineRepository.GetAll();
+            var result = productionLineRepository.GetAll();
             return result;
         }
 

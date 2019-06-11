@@ -18,7 +18,7 @@ namespace RoboPlant.Application.Production.ProductionLine
 
         public async Task<ShutDownForMaintenanceResult> ShutDownForMaintenance(Guid productionLineId)
         {
-            var getProductionLineResult = await this.productionLineRepository.GetById(new ProductionLineId(productionLineId));
+            var getProductionLineResult = await productionLineRepository.GetById(new ProductionLineId(productionLineId));
 
             var result = await getProductionLineResult.Match<Task<ShutDownForMaintenanceResult>>(
                 async success => await ExecuteShutDown(success.Result),
@@ -43,7 +43,7 @@ namespace RoboPlant.Application.Production.ProductionLine
             return await action().Match(
                 success: async _ =>
                 {
-                    var addResult = await this.productionLineRepository.Add(productionLine);
+                    var addResult = await productionLineRepository.Add(productionLine);
                     var shutDownProductionLineResult = addResult.Match<ShutDownForMaintenanceResult>(
                         success => new ShutDownForMaintenanceResult.Success(),
                         notReachable => new ShutDownForMaintenanceResult.NotReachable(),

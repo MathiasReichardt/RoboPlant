@@ -18,7 +18,7 @@ namespace RoboPlant.Server.REST.Design
             Count = entities.Count;
 
             var relatedBlueprints = entities.Select(b => new RelatedEntity(DefaultHypermediaRelations.EmbeddedEntities.Item, new HypermediaObjectReference(new RobotBlueprintHto(b))));
-            this.Entities.AddRange(relatedBlueprints);
+            Entities.AddRange(relatedBlueprints);
         }
     }
 }

@@ -11,8 +11,8 @@ namespace RoboPlant.Server.REST.EntryPoint
     {
         public EntryPointHto()
         {
-            this.Links.Add("production", new HypermediaObjectKeyReference(typeof(ProductionHto)));
-            this.Links.Add("design", new HypermediaObjectKeyReference(typeof(DesignHto)));
+            Links.Add("production", new HypermediaObjectKeyReference(typeof(ProductionHto)));
+            Links.Add("design", new HypermediaObjectKeyReference(typeof(DesignHto)));
         }
     }
 }

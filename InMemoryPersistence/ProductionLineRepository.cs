@@ -16,7 +16,7 @@ namespace RoboPlant.InMemoryPersistence
 
         public ProductionLineRepository()
         {
-            this.internalRepository = new InMemoryRepository<ProductionLineModel, Guid>
+            internalRepository = new InMemoryRepository<ProductionLineModel, Guid>
             {
                 GenerateKeyOnAdd = true
             };
@@ -47,7 +47,7 @@ namespace RoboPlant.InMemoryPersistence
                 }
             };
 
-            this.internalRepository.Add(insertItems);
+            internalRepository.Add(insertItems);
         }
 
         public Task<GetAllResult<ProductionLine>> GetAll()
@@ -55,7 +55,7 @@ namespace RoboPlant.InMemoryPersistence
             IEnumerable<ProductionLineModel> result;
             try
             {
-                result = this.internalRepository.GetAll();
+                result = internalRepository.GetAll();
             }
             catch (Exception e)
             {
@@ -74,7 +74,7 @@ namespace RoboPlant.InMemoryPersistence
             ProductionLineModel result;
             try
             {
-                result = this.internalRepository.Get(productionLineId.Value);
+                result = internalRepository.Get(productionLineId.Value);
             }
             catch (Exception e)
             {
@@ -105,7 +105,7 @@ namespace RoboPlant.InMemoryPersistence
 
             try
             {
-                this.internalRepository.Add(model);
+                internalRepository.Add(model);
             }
             catch (Exception e)
             {

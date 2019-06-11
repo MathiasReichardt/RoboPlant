@@ -15,7 +15,7 @@ namespace RoboPlant.Server.REST.Production
             var productionLineHtos = productionLines.Select(p => 
                 new RelatedEntity("ProductionLine", new HypermediaObjectReference(new ProductionLineHto(p))));
 
-            this.Entities.AddRange(productionLineHtos);
+            Entities.AddRange(productionLineHtos);
         }
     }
 }

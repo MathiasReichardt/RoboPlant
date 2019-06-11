@@ -16,7 +16,7 @@ namespace RoboPlant.Server.Problems
         {
             if (environment.IsDevelopment())
             {
-                this.AddExceptionInformation = true;
+                AddExceptionInformation = true;
             }
         }
 
@@ -83,7 +83,7 @@ namespace RoboPlant.Server.Problems
                 Title = "Hypermedia formatter error.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaFormatterError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(hypermediaFormatterException)
+                Detail = AddExceptionDetail(hypermediaFormatterException)
             };
         }
 
@@ -94,7 +94,7 @@ namespace RoboPlant.Server.Problems
                 Title = "Hypermedia error.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".HyperrmediaError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(hypermediaException)
+                Detail = AddExceptionDetail(hypermediaException)
             };
         }
 
@@ -105,7 +105,7 @@ namespace RoboPlant.Server.Problems
                 Title = "Sorry, something went wrong.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".InternalError",
                 StatusCode = StatusCodes.Status500InternalServerError,
-                Detail = this.AddExceptionDetail(exception)
+                Detail = AddExceptionDetail(exception)
             };
         }
 

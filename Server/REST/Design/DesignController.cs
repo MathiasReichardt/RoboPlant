@@ -19,7 +19,7 @@ namespace RoboPlant.Server.REST.Design
         public DesignController(DesignCommandHandler commandHandler, IProblemFactory problemFactory)
         {
             ProblemFactory = problemFactory;
-            this.CommandHandler = commandHandler;
+            CommandHandler = commandHandler;
         }
 
         [HttpGetHypermediaObject(typeof(DesignHto))]
