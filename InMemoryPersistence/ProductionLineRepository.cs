@@ -16,8 +16,10 @@ namespace RoboPlant.InMemoryPersistence
 
         public ProductionLineRepository()
         {
-            this.internalRepository = new InMemoryRepository<ProductionLineModel, Guid>();
-            this.internalRepository.GenerateKeyOnAdd = true;
+            this.internalRepository = new InMemoryRepository<ProductionLineModel, Guid>
+            {
+                GenerateKeyOnAdd = true
+            };
             AddDemoData();
         }
 

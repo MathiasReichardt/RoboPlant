@@ -48,7 +48,7 @@ namespace RoboPlant.Server.Problems
             return new ProblemJson
             {
                 Title = "Service is not available",
-                Detail = $"Requestcould not be fullfilled because a required service is not available. Pease retry later.",
+                Detail = "Requestcould not be fullfilled because a required service is not available. Pease retry later.",
                 ProblemType = RoboPlantProblemTypeNamespace + ".ServiceUnavailable",
                 StatusCode = StatusCodes.Status503ServiceUnavailable
             };

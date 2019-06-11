@@ -38,9 +38,6 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotReachable : GetAllResult<TResult>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : GetAllResult<TResult>

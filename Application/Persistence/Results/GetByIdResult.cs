@@ -40,16 +40,10 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotFound : GetByIdResult<TResult>
         {
-            public NotFound()
-            {
-            }
         }
 
         public sealed class NotReachable : GetByIdResult<TResult>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : GetByIdResult<TResult>

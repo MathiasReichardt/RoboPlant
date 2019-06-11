@@ -38,9 +38,6 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotReachable : AddResult<TId>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : AddResult<TId>

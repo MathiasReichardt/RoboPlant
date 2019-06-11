@@ -17,8 +17,10 @@ namespace RoboPlant.InMemoryPersistence
 
         public RobotBlueprintRepository()
         {
-            this.internalRepository = new InMemoryRepository<RobotBlueprintModel, Guid>();
-            this.internalRepository.GenerateKeyOnAdd = true;
+            this.internalRepository = new InMemoryRepository<RobotBlueprintModel, Guid>
+            {
+                GenerateKeyOnAdd = true
+            };
             AddDemoData();
         }
 
@@ -57,7 +59,7 @@ namespace RoboPlant.InMemoryPersistence
                     HumanReadableName = "T-800",
                     Description = "He'll be back.",
                     ProductionEfford = 40
-                },
+                }
 
             };
 

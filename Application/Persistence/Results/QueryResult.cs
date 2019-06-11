@@ -44,9 +44,6 @@ namespace RoboPlant.Application.Persistence.Results
 
         public sealed class NotReachable : QueryResult<TResult>
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class InvalidQuery : QueryResult<TResult>

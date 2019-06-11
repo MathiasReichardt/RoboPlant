@@ -33,30 +33,18 @@ namespace RoboPlant.Application.Production.ProductionLine.Results
 
         public sealed class Success : CompleteMaintenanceResult
         {
-            public Success()
-            {
-            }
         }
 
         public sealed class NotAvailable : CompleteMaintenanceResult
         {
-            public NotAvailable()
-            {
-            }
         }
 
         public sealed class NotFound : CompleteMaintenanceResult
         {
-            public NotFound()
-            {
-            }
         }
 
         public sealed class NotReachable : CompleteMaintenanceResult
         {
-            public NotReachable()
-            {
-            }
         }
 
         public sealed class Error : CompleteMaintenanceResult

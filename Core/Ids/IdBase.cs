@@ -18,6 +18,12 @@ namespace RoboPlant.Domain.Ids
 
         public static bool operator ==(IdBase l, IdBase r)
         {
+            if (l == null && r != null ||
+                l != null && r == null)
+            {
+                return false;
+            }
+
             return l.Value == r.Value;
         }
 

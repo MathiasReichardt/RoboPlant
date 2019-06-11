@@ -65,7 +65,7 @@ namespace RoboPlant.Server.REST.Design
             return result.Match(
                 success =>
                 {
-                    var resultHto = Ok(new BlueprintQueryResultHto(success, queryParameters));
+                    var resultHto = Ok(new BlueprintQueryResultHto(success.Result, queryParameters));
                     return resultHto;
                 },
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),

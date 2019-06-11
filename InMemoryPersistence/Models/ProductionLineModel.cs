@@ -12,8 +12,5 @@ namespace RoboPlant.InMemoryPersistence.Models
         public string HumanReadableName { get; set; }
 
         public ProductionLineState State { get; set; }
-
-        public ProductionLineModel() {}
-
     }
 }
