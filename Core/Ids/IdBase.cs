@@ -23,6 +23,11 @@ namespace RoboPlant.Domain.Ids
                 return ReferenceEquals(null, r);
             }
 
+            if (ReferenceEquals(null, r))
+            {
+                return false;
+            }
+
             return l.Value == r.Value;
         }
 
