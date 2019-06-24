@@ -15,8 +15,9 @@ namespace RoboPlant.Server.REST.ProductionLine
             Id = productionLine.Id.Value;
             Name = productionLine.HumanReadableName;
             State = productionLine.State;
-            ShutDownForMaintenance = new ShutDownForMaintenance(() => productionLine.ShutDownForMaintenance.HasValue, () => {}); // we dont need the execute
-            CompleteMaintenance = new CompleteMaintenance(() => productionLine.CompleteMaintenance.HasValue, () => {});          // we dont need the execute
+            ShutDownForMaintenance = new ShutDownForMaintenance(() => productionLine.ShutDownForMaintenance.HasValue, () => {});                      // we dont need the execute
+            CompleteMaintenance = new CompleteMaintenance(() => productionLine.CompleteMaintenance.HasValue, () => {});                               // we dont need the execute
+            ProduceRobot = new ProduceRobot(() => productionLine.ProduceRobot.HasValue, parameters => throw new NotImplementedException("Not used")); // we dont need the execute
         }
 
         [Key]
@@ -27,11 +28,14 @@ namespace RoboPlant.Server.REST.ProductionLine
 
         public string Name { get; set; }
 
-        [HypermediaAction(Name = "ShutDownForMaintenance", Title = "Shuts down the production line in an orderly fashion to do maintenance.")]
+        [HypermediaAction(Name = "ShutDownForMaintenance", Title = "Shut down the production line in an orderly fashion to do maintenance.")]
         public ShutDownForMaintenance ShutDownForMaintenance { get; set; }
 
-        [HypermediaAction(Name = "CompleteMaintenance", Title = "Completes the maintenance of the production line.")]
+        [HypermediaAction(Name = "CompleteMaintenance", Title = "Complete the maintenance of the production line.")]
         public CompleteMaintenance CompleteMaintenance { get; set; }
+
+        [HypermediaAction(Name = "ProduceRobot", Title = "Queue a robot blueprint for production.")]
+        public ProduceRobot ProduceRobot { get; set; }
     }
 
     public class ShutDownForMaintenance : HypermediaAction
@@ -46,5 +50,25 @@ namespace RoboPlant.Server.REST.ProductionLine
         public CompleteMaintenance(Func<bool> canExecute, Action command) : base(canExecute, command)
         {
         }
+    }
+
+    public class ProduceRobot : HypermediaFunction<ProductionRequestParameters, ProductionStateResult>
+    {
+        public ProduceRobot(Func<bool> canExecute, Func<ProductionRequestParameters, ProductionStateResult> command) : base(canExecute, command)
+        {
+        }
+    }
+
+    public class ProductionStateResult
+    {
+        // TODO
+        // result state for hto production
+        // id
+    }
+
+    public class ProductionRequestParameters : IHypermediaActionParameter
+    {
+        // TODO
+        // id of blueprint
     }
 }

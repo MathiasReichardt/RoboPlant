@@ -64,5 +64,11 @@ namespace RoboPlant.Server.REST.ProductionLine
                 notReachable => this.Problem(ProblemFactory.ServiceUnavailable()),
                 error => this.Problem(ProblemFactory.Exception(error.Exception)));
         }
+
+        [HttpPostHypermediaAction("{productionLineId:Guid}/ProduceRobot", typeof(ProduceRobot))]
+        public async Task<ActionResult> ProduceRobot(Guid productionLineId)
+        {
+            throw new NotImplementedException("TODO");
+        }
     }
 }
