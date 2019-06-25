@@ -195,6 +195,59 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "ProductionRequestParameter schema",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/actionparmametertypes/ProductionRequestParameters",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"actionparmametertypes",
+						"ProductionRequestParameters"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Produce robot",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"RobotBlueprintUri\": \"http://localhost:5000/api/robotblueprint/9632d538-b44e-4034-b6ca-19ee4441000b\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/productionline/edaef8da-c0cc-4284-b50f-086e468a399c/producerobot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"productionline",
+						"edaef8da-c0cc-4284-b50f-086e468a399c",
+						"producerobot"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

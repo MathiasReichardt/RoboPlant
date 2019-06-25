@@ -1,5 +1,6 @@
 ﻿using System;
 using RoboPlant.Domain.Production;
+using RoboPlant.Server.REST.RobotBlueprint;
 using WebApi.HypermediaExtensions.Hypermedia;
 using WebApi.HypermediaExtensions.Hypermedia.Actions;
 using WebApi.HypermediaExtensions.Hypermedia.Attributes;
@@ -68,7 +69,7 @@ namespace RoboPlant.Server.REST.ProductionLine
 
     public class ProductionRequestParameters : IHypermediaActionParameter
     {
-        // TODO
-        // id of blueprint
+        [KeyFromUri(typeof(RobotBlueprintHto), schemaProperyName: "RobotBlueprintUri")]
+        public Guid RobotBlueprintId { get; set; }
     }
 }

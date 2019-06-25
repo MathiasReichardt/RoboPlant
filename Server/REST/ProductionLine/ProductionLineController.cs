@@ -66,9 +66,12 @@ namespace RoboPlant.Server.REST.ProductionLine
         }
 
         [HttpPostHypermediaAction("{productionLineId:Guid}/ProduceRobot", typeof(ProduceRobot))]
-        public async Task<ActionResult> ProduceRobot(Guid productionLineId)
+        public async Task<ActionResult> ProduceRobot(Guid productionLineId, ProductionRequestParameters parameters)
         {
-            throw new NotImplementedException("TODO");
+            // todo
+            // check if parameter is provided
+            // call handler
+            return Ok();
         }
     }
 }

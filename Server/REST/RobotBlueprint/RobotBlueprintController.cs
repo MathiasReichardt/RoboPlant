@@ -24,7 +24,7 @@ namespace RoboPlant.Server.REST.RobotBlueprint
             ProblemFactory = problemFactory;
         }
 
-        [HttpGetHypermediaObject("{robotBlueprintId}", typeof(RobotBlueprintHto))]
+        [HttpGetHypermediaObject("{robotBlueprintId:Guid}", typeof(RobotBlueprintHto))]
         public async Task<ActionResult> GetRobotBlueprint(Guid robotBlueprintId)
         {
             var byIdResult = await CommandHandler.GetRobotBlueprintGetById(robotBlueprintId);
