@@ -42,7 +42,8 @@ namespace RoboPlant.Server
                 services,
                 new HypermediaExtensionsOptions
                 {
-                    ReturnDefaultRouteForUnknownHto = true
+                    ReturnDefaultRouteForUnknownHto = true,
+                    LowercaseUrls = true
                 });
 
             // Infrastructure
