@@ -202,14 +202,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/actionparmametertypes/ProductionRequestParameters",
+					"raw": "http://localhost:5000/actionparametertypes/ProductionRequestParameters",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"actionparmametertypes",
+						"actionparametertypes",
 						"ProductionRequestParameters"
 					]
 				}
