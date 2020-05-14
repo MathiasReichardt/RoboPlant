@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{78CA654E-D6ED-432B-807B-BFC2E61CDD9D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain.csproj", "{1DB809FB-B1DB-4ABC-898E-C84EB80FAB8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{1DB809FB-B1DB-4ABC-898E-C84EB80FAB8B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InMemoryPersistence", "InMemoryPersistence\InMemoryPersistence.csproj", "{9D336D6D-4A53-47EE-8A54-D7F9A24DF5BD}"
 EndProject
