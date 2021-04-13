@@ -9,9 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Bluehands.Hypermedia.Relations" Version="0.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="WebApiHypermediaExtensionsCore" Version="1.4.1" />
+    <PackageReference Include="WebApiHypermediaExtensionsCore" Version="1.6.0" />
   </ItemGroup>
 
   <ItemGroup>
