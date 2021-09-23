@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "4930105d-5300-4547-ba95-1ae73229c11c",
+		"_postman_id": "bc224c2b-e88b-4611-a816-05091a627f07",
 		"name": "RoboPlant",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -197,57 +197,25 @@
 			"response": []
 		},
 		{
-			"name": "ProductionRequestParameter schema",
+			"name": "BlueprintQueryParameters",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:5000/actionparametertypes/ProductionRequestParameters",
+					"raw": "http://localhost:5000/ActionParameterTypes/blueprintqueryparameters",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "5000",
 					"path": [
-						"actionparametertypes",
-						"ProductionRequestParameters"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Produce robot",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"RobotBlueprintUri\": \"http://localhost:5000/api/robotblueprint/9632d538-b44e-4034-b6ca-19ee4441000b\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:5000/api/productionline/edaef8da-c0cc-4284-b50f-086e468a399c/producerobot",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"productionline",
-						"edaef8da-c0cc-4284-b50f-086e468a399c",
-						"producerobot"
+						"ActionParameterTypes",
+						"blueprintqueryparameters"
 					]
 				}
 			},
 			"response": []
 		}
-	]
+	],
+	"protocolProfileBehavior": {}
 }
