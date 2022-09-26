@@ -1,4 +1,5 @@
-﻿using RoboPlant.Server.REST.Design;
+﻿using System;
+using RoboPlant.Server.REST.Design;
 using RoboPlant.Server.REST.Production;
 using WebApi.HypermediaExtensions.Hypermedia;
 using WebApi.HypermediaExtensions.Hypermedia.Attributes;

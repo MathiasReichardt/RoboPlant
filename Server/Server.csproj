@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <StartupObject></StartupObject>
     <AssemblyName>RoboPlant.Server</AssemblyName>
@@ -9,8 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="WebApiHypermediaExtensionsCore" Version="1.6.0" />
+     <PackageReference Include="WebApiHypermediaExtensionsCore" Version="1.10.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -39,12 +39,10 @@
                     });
 
             // Initializes and adds the Hypermedia Extensions
-            builder.AddHypermediaExtensions(
-                services,
-                new HypermediaExtensionsOptions
-                {
-                    ReturnDefaultRouteForUnknownHto = true,
-                });
+            builder.Services.AddHypermediaExtensions( o =>
+            {
+                o.ReturnDefaultRouteForUnknownHto = true;
+            });
 
             // Infrastructure
             services.AddCors();
